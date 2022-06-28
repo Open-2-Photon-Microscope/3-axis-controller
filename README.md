@@ -1,3 +1,3 @@
 # 3-axis-controller
 a controller system to operate motors and microscope XYZ stage
-![Alt text](stepper_motor.gif) / ![](stepper_motor.gif)
+![Here is a sneak peek of how we figured out the connection between the rotary encoder and the steeper motor.](stepper_motor.gif) / ![](stepper_motor.gif)
