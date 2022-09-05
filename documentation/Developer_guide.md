@@ -86,113 +86,81 @@ It is parametrized, so if you want to customise it, you can open the source file
 | ^ | box depth | inside box depth. Equals to rotary encoder thickness + RE wire connection depth + PCB dimension 1 + BeeHive dimension 2 + ULN board dimension2 + 3 * PCB gap |
 | ^ | mounting hole diameter | - |
 | ^ | below part thickness | - |
-|^| assembly gap | gap dedicated to counter 3D printed imprecision and allow by hand assembly |
+|^^| assembly gap | gap dedicated to counter 3D printed imprecision and allow by hand assembly |
 | ^ | motor cables hole height | rectangle side dimension for motor cables |
 | ^ | motor cables hole length | rectangle side dimension for motor cables |
 | ^ | power supply hole | square side dimension for power supply cables |
 
 If you are curious about a specific box feature, please find its design brief on the repository.
 
-b.  Electronics
+## b.  Electronics
 
 To allow a proper operation of each rotary encoder, and reduce channel voltage to 3V for esp32 power supply, we had to design a custom made board. We used KiCad to draw the schematics and then design the board. The schematics and the board source files are available in the Github repo. If you only aime to manufacture it again, please find the gerber file in the same place.
 
-c.  Code
+## c.  Code
 
 The code has been developed on a Jupyter Notebook. It has been implemented in several modules :
 
--   Pin assignment
+- Pin assignment
 
 You can find here two functions: one that assigns channels A and B of each rotary encoder to pins and another that assigns motors to pins.
 
--   Motor functions
+- Motor functions
 
-    -   The first function defines the motor sequence depending on the command : clockwise, counter clockwise or freeze.
+    - The first function defines the motor sequence depending on the command : clockwise, counter clockwise or freeze.
+    - The second one runs the required amount of steps. If the required number is negative, let's say "-n", it will run "n" counter clockwise sequences.
+    - The third one assigns the required motor rotation combination to each translation axis. For example, if the Y-axis rotary encoder sends a clockwise command, motors a and b are going to run -4 steps and motor c 8 steps. This conversion from cartesian to delta movement is explained in d. Kinematics.
 
-    -   The second one runs the required amount of steps. If the required number is negative, let's say "-n", it will run "n" counter clockwise sequences.
-
-    -   The third one assigns the required motor rotation combination to each translation axis. For example, if the Y-axis rotary encoder sends a clockwise command, motors a and b are going to run -4 steps and motor c 8 steps. This conversion from cartesian to delta movement is explained in d. Kinematics.
-
--   Rotary encoder function\
-    ![][5]
+- Rotary encoder function
 
 (Rotary optical encoder from Bourns datasheet)
 
 This function translates the rotary encoder signal into motor rotations. Channels A and B have square signals, with high (=1) and low (=0) output values. However the signals are slightly delayed one another. The first channel to reach the high output value indicates if the encoder is turned either clockwise or counterclockwise. In order to know which signal is ahead, the code implements two data: the channel value and the channel state. The channel state is the current output value minus the previous one. When this state is equal to 1, it means that the output has changed from high to low. So, if channel A state is 1 and channel B output value is 0, then channel A is the first one to reach high output. This means that the rotary encoder is being turned clockwise. On the contrary, if channel B state is 1 and channel A output value is 0, the rotary encoder is being turned anticlockwise.
 
--   Program
+- Program
 
 The program is an open loop. Its first step is to assign the rotary encoder channels pins and the motor pins as well. In the open loop, each rotary encoder is assigned to a translation axis, and runs motor rotation if the appropriate output voltage is detected.
 
-a.  Kinematics
+### d.  Kinematics
 
 The 28byj-48 stepper motor has four coils that can be activated by sequences. Depending on the sequence pattern, the motor will turn clockwise or counterclockwise. Here is the clockwise sequence pattern: \[1,0,0,0\], \[0,1,0,0\], \[0,0,1,0\], \[0,0,0,1\]. Each sequence activates one motor step. So, every complete sequence pattern activates four motor steps. The original motor step is 0,18°. So the motor has to do 2038 steps to complete a rotation.
 
 To reach the sub micron step size, you would have to upgrade the program. We have been focusing on steps (sub micron steps would be called "microsteps"). In order to translate in one axis translation, the Delta Stage requires a specific motor combination. According to the matrix below, one positive unit in the x direction requires -cos30 (= - 0,87) motor a step and one 0,87 motor b step. In order to command a decimal step value you would require PWM. As it lowers the device stability and consumes a lot of energy, we wanted to first test the device with whole steps.
 
-![][6]
 
-![][7]
 
 The littlest multiple that would allow a complete whole number step value combination is 8. This way, the new motor step is 1,44°, 250 steps would complete a whole motor shaft rotation.
 
-  --------------------------------- -------------------------------------
-                                    **8 steps**
+| Table name | 8 steps |
+| ------------- | ------------- |
+| 1 | 8 steps |
+| 1 | 1,44° |
+| 0,5 = cos60 | 4 steps |
+| 0,5 = cos60 | 0,72° |
+| 0,87 = cos30 | 6,96 ≈ steps |
+| 0,87 = cos30 | 1,25° |
 
-  1                                 8 steps
+## 4.  Current state of development
 
-                                    1,44°
+### a.  tasks currently worked on
 
-  0,5 = cos60                       4 steps
+Have a look at the [github projects](https://github.com/Open-2-Photon-Microscope/3-axis-controller/projects?type=classic), to check the current state of development.
 
-                                    0,72°
+### b.  open task priorities
 
-  0,87 = cos30                      6,96 ≈ 7 steps
+- Acceptance tests [](https://github.com/Open-2-Photon-Microscope/3-axis-controller/projects/6#card-85028599):
+    -  check how well it moves in X,Y,Z (as the code we are implementing converts delta stage movement to cartesian)
+    -  see what is the minimum amount we can move
+    -  see how fast things are moving
+    -  see how stable the system is without moving (drifts over 30min/hour? or even longer)
 
-                                    1,25°
-  --------------------------------- -------------------------------------
+- Programming
+    -  Refine the open loop program. OpenFlexure uses a specific algorithm to overcome open loop backlashes.
+    -  The user has to be able to command the stage to translate to a specific location.
+    -  Allow the device to do microstepping. The minimal step size has to be sub-micron.
 
-4.  Current state of development
+## 5.  Documentation/references
 
-    a.  tasks currently worked on
-
-Have a look at the [[github projects]{.underline}][8], to check the current state of development.
-
-b.  open task priorities
-
--   Acceptance tests\
-    [[https://github.com/Open-2-Photon-Microscope/3-axis-controller/projects/6#card-85028599]{.underline}][9] :
-
-    -   check how well it moves in X,Y,Z (as the code we are implementing converts delta stage movement to cartesian)
-
-    -   see what is the minimum amount we can move
-
-    -   see how fast things are moving
-
-    -   see how stable the system is without moving (drifts over 30min/hour? or even longer)
-
--   Programming
-
-    -   Refine the open loop program. OpenFlexure uses a specific algorithm to overcome open loop backlashes.
-
-    -   The user has to be able to command the stage to translate to a specific location.
-
-    -   Allow the device to do microstepping. The minimal step size has to be sub-micron.
-
-5.  Documentation/references
-
-    a.  Delta Stage
-
--   McDermott, S., Ayazi, F., Collins, J., Knapper, J., Stirling, J., Bowman, R., & Cicuta, P. «Multimodal microscopy imaging with the OpenFlexure Delta Stage.» *Optics Express*, 2022.
-
--   James P. Sharkey, Darryl C. W. Foo, Alexandre Kabla, et al. «A one-piece 3D printed flexure translation stage for open-source microscopy.» *Review of Scientific Instruments*, 2016
-
-  [1]: https://openflexure.org/projects/deltastage/
-  [2]: media/image1.png {width="2.46875in" height="1.1068722659667543in"}
-  [3]: https://github.com/amchagas/BeeHive
-  [4]: media/image2.png {width="4.566637139107612in" height="7.740676946631671in"}
-  [5]: media/image3.png {width="4.546875546806649in" height="1.4502963692038495in"}
-  [6]: media/image4.png {width="6.270833333333333in" height="2.1039074803149607in"}
-  [7]: media/image5.png {width="3.3020833333333335in" height="0.9583333333333334in"}
-  [8]: https://github.com/Open-2-Photon-Microscope/3-axis-controller/projects?type=classic
-  [9]: https://github.com/Open-2-Photon-Microscope/3-axis-controller/projects/6#card-85028599
+### a.  Delta Stage
+- McDermott, S., Ayazi, F., Collins, J., Knapper, J., Stirling, J., Bowman, R., & Cicuta, P. «Multimodal microscopy imaging with the OpenFlexure Delta Stage.» *Optics Express*, 2022.
+- James P. Sharkey, Darryl C. W. Foo, Alexandre Kabla, et al. «A one-piece 3D printed flexure translation stage for open-source microscopy.» *Review of Scientific Instruments*, 2016
