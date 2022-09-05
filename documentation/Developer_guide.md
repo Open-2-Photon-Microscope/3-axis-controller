@@ -139,7 +139,7 @@ The littlest multiple that would allow a complete whole number step value combin
 | | 1,44° |
 | 0,5 = cos60 | 4 steps |
 || 0,72° |
-| 0,87 = cos30 | 6,96 ≈ steps |
+| 0,87 = cos30 | 6,96 ≈ 7 steps |
 || 1,25° |
 
 ## 4.  Current state of development
