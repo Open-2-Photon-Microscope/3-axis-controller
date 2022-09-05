@@ -1,16 +1,14 @@
-Developer guide
+# Developer guide
 
-\*\*source files\*\*
-
-1.  Bill of materials
+## 1.  Bill of materials
 
 In this part we will focus on what components were used and why they were used. Please find the BOM as table format on the repository.
 
-a.  Delta stage
+### a.  Delta stage
 
 The [[OpenFlexure Delta Stage]{.underline}][1] is an acknowledged open source device initially designed as a microscope stage. Papers about it were published, which means data such as drift, resolution and stability are available. The stage 3-axis translations are controlled via three 28BYJ-48 -- 5V unipolar stepper motors. This is why the code was specifically developed for coil sequences activation of this kind of motors. Openflexure's program is aimed for Arduino, but in order to broaden our target audience, we wrote a Python program, which runs an esp32 microcontroller.![][2]
 
-b.  Electronics
+### b.  Electronics
 
     i.  To connect the Delta Stage to our manipulator, we are using a [[BeeHive]{.underline}][3] board. It's a platform using esp32 as microcontroller, which requires a 12 V power input and presents many 5 V outputs to connect devices. Beware about the common connection mistakes you can make using the BeeHive (check "Common mistakes" doc part 1. a.).
 
