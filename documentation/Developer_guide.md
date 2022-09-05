@@ -7,24 +7,19 @@ In this part we will focus on what components were used and why they were used. 
 ### a.  Delta stage
 
 The [OpenFlexure Delta Stage](https://openflexure.org/projects/deltastage/) is an acknowledged open source device initially designed as a microscope stage. Papers about it were published, which means data such as drift, resolution and stability are available. The stage 3-axis translations are controlled via three 28BYJ-48 -- 5V unipolar stepper motors. This is why the code was specifically developed for coil sequences activation of this kind of motors. Openflexure's program is aimed for Arduino, but in order to broaden our target audience, we wrote a Python program, which runs an esp32 microcontroller.
-![test](pictures/stepper_motor.png)
+![28BYJ-48 stepper motor](pictures/stepper_motor.png)
 
 ### b.  Electronics
-
-    i.  To connect the Delta Stage to our manipulator, we are using a [[BeeHive]{.underline}][3] board. It's a platform using esp32 as microcontroller, which requires a 12 V power input and presents many 5 V outputs to connect devices. Beware about the common connection mistakes you can make using the BeeHive (check "Common mistakes" doc part 1. a.).
-
-    ii. The rotary encoders are connected to the BeeHive board through a PCB custom made for this project. It contains pull-up resistors and filter capacitors, which are recommended in the component data sheet for proper operation. There's also a bridge divider reducing the encoder channel signal voltage from 5 V to 3 V for the esp32 power supply.
-
-    iii. Here is a connection scheme from one rotary encoder to one motor.\
-         ![][4]
+- To connect the Delta Stage to our manipulator, we are using a [BeeHive](https://github.com/amchagas/BeeHive) board. It's a platform using esp32 as microcontroller, which requires a 12 V power input and presents many 5 V outputs to connect devices. Beware about the common connection mistakes you can make using the BeeHive (check "Common mistakes" doc part 1. a.).
+- The rotary encoders are connected to the BeeHive board through a PCB custom made for this project. It contains pull-up resistors and filter capacitors, which are recommended in the component data sheet for proper operation. There's also a bridge divider reducing the encoder channel signal voltage from 5 V to 3 V for the esp32 power supply.
+- Here is a connection scheme from one rotary encoder to one motor.
+![Electrical connection scheme](pictures/electrical_connections.png)
 
 ### c.  Box
 
 The electrical connections above-mentioned are contained in a box. This box is also the concrete outcome users are going to interact with to control the delta stage. It can be 3D printed (FFF) with PLA, and requires about 350 g of material. To assemble the PCBs in it, you will need :
-
-i.  x 56 M3 nuts
-
-ii. x 28 M3 screws, 6 mm below head length, Ø5 mm head diameter
+- x 56 M3 nuts
+- x 28 M3 screws, 6 mm below head length, Ø5 mm head diameter
 
 ## 2.  Bill of tools and skills
 
@@ -53,6 +48,13 @@ To upgrade the code, or understand its structure, you'll need some knowledge in 
 ### a.  The box CAD
 
 It is parametrized, so if you want to customise it, you can open the source file in FreeCAD and directly change the wanted parameter in the Spreadsheet. Here is a table which identifies the different parameter spreadsheets :
+
+| Table name | Parameter | Explanation |
+| ------------- | ------------- | ------------- |
+| Spreadsheet.front | length | box length without taking into account the 2 sides thickness |
+| Spreadsheet.front | height  | box height without taking into account the top and below sides thickness |
+
+
 
   ----------------------- ---------------------------- -------------------------------------------------------------------------------------------------------------------------------------
   Table name              Parameter                    Explanation
