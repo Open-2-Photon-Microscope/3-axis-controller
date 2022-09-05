@@ -25,7 +25,7 @@ The electrical connections above-mentioned are contained in a box. This box is a
 
 ### a.  CAD
 
-To update the design, you will need **FreeCAD** software. It's better if you're familiar with it. More details about the way the CAD was made is written in the following 3. a. If you need to modify the rotary encoder board, you'll need to use **KiCad**.
+To update the design, you will need **FreeCAD** software. It's better if you're familiar with it. More details about the way the CAD was made is written in the following [3. a.](https://github.com/Open-2-Photon-Microscope/3-axis-controller/blob/main/documentation/Developer_guide.md#a--the-box-cad). If you need to modify the rotary encoder board, you'll need to use **KiCad**.
 
 ### b.  FFF 3D printer
 
@@ -52,7 +52,7 @@ It is parametrized, so if you want to customise it, you can open the source file
 | Table name | Parameter | Explanation |
 | ------------- | ------------- | ------------- |
 | Spreadsheet.front | length | box length without taking into account the 2 sides thickness |
-| Spreadsheet.front | height  | box height without taking into account the top and below sides thickness |
+| ^^ Spreadsheet.front | height  | box height without taking into account the top and below sides thickness |
 
 
 
