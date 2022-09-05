@@ -129,9 +129,10 @@ To reach the sub micron step size, you would have to upgrade the program. We hav
 
 
 
-The littlest multiple that would allow a complete whole number step value combination is 8. This way, the new motor step is 1,44°, 250 steps would complete a whole motor shaft rotation.
+The littlest multiple that would allow a complete whole number step value combination is 8. This way, the new motor step is 1,44°, so 250 steps would complete a whole motor shaft rotation.
 
-
+|  | 8 steps |
+| ------------- | ------------- |
 | 1 | 8 steps |
 | | 1,44° |
 | 0,5 = cos60 | 4 steps |
@@ -147,7 +148,7 @@ Have a look at the [github projects](https://github.com/Open-2-Photon-Microscope
 
 ### b.  open task priorities
 
-- Acceptance tests [](https://github.com/Open-2-Photon-Microscope/3-axis-controller/projects/6#card-85028599):
+- [Acceptance tests](https://github.com/Open-2-Photon-Microscope/3-axis-controller/projects/6#card-85028599):
     -  check how well it moves in X,Y,Z (as the code we are implementing converts delta stage movement to cartesian)
     -  see what is the minimum amount we can move
     -  see how fast things are moving
