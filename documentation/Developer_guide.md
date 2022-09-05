@@ -131,12 +131,12 @@ To reach the sub micron step size, you would have to upgrade the program. We hav
 
 The littlest multiple that would allow a complete whole number step value combination is 8. This way, the new motor step is 1,44°, 250 steps would complete a whole motor shaft rotation.
 
-| Table name | 8 steps |
+|| 8 steps |
 | ------------- | ------------- |
 | 1 | 8 steps |
-| 1 | 1,44° |
+| ^1 | 1,44° |
 | 0,5 = cos60 | 4 steps |
-| 0,5 = cos60 | 0,72° |
+|^| 0,72° |
 | 0,87 = cos30 | 6,96 ≈ steps |
 | 0,87 = cos30 | 1,25° |
 
@@ -163,4 +163,4 @@ Have a look at the [github projects](https://github.com/Open-2-Photon-Microscope
 
 ### a.  Delta Stage
 - McDermott, S., Ayazi, F., Collins, J., Knapper, J., Stirling, J., Bowman, R., & Cicuta, P. «Multimodal microscopy imaging with the OpenFlexure Delta Stage.» *Optics Express*, 2022.
-- James P. Sharkey, Darryl C. W. Foo, Alexandre Kabla, et al. «A one-piece 3D printed flexure translation stage for open-source microscopy.» *Review of Scientific Instruments*, 2016
+- James P. Sharkey, Darryl C. W. Foo, Alexandre Kabla, et al. «A one-piece 3D printed flexure translation stage for open-source microscopy.» *Review of Scientific Instruments*, 2016.
