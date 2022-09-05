@@ -112,6 +112,7 @@ You can find here two functions: one that assigns channels A and B of each rotar
     - The third one assigns the required motor rotation combination to each translation axis. For example, if the Y-axis rotary encoder sends a clockwise command, motors a and b are going to run -4 steps and motor c 8 steps. This conversion from cartesian to delta movement is explained in d. Kinematics.
 
 - Rotary encoder function
+![Output voltage signal rotary encoder](pictures/signal_rotary_encoder.png)
 
 (Rotary optical encoder from Bourns datasheet)
 
@@ -127,7 +128,8 @@ The 28byj-48 stepper motor has four coils that can be activated by sequences. De
 
 To reach the sub micron step size, you would have to upgrade the program. We have been focusing on steps (sub micron steps would be called "microsteps"). In order to translate in one axis translation, the Delta Stage requires a specific motor combination. According to the matrix below, one positive unit in the x direction requires -cos30 (= - 0,87) motor a step and one 0,87 motor b step. In order to command a decimal step value you would require PWM. As it lowers the device stability and consumes a lot of energy, we wanted to first test the device with whole steps.
 
-
+![Motor combination for cartesian translations](pictures/motor_combination.png)
+![Matrix](pictures/matrix.png)
 
 The littlest multiple that would allow a complete whole number step value combination is 8. This way, the new motor step is 1,44°, so 250 steps would complete a whole motor shaft rotation.
 
