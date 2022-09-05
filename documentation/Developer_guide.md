@@ -56,92 +56,40 @@ It is parametrized, so if you want to customise it, you can open the source file
 | ^ | fastening thickness | thread length |
 | ^ | thickness | pocket depth minus slack |
 | ^ | notch length | - |
-
-
-
-  ----------------------- ---------------------------- -------------------------------------------------------------------------------------------------------------------------------------
-  Table name              Parameter                    Explanation
-
-  Spreadsheet.front       length                       box length without taking into account the 2 sides thickness
-
-                          height                       box height without taking into account the top and below sides thickness
-
-                          fastening thickness          thread length
-
-                          thickness                    Pocket depth minus slack
-
-                          notch length                 \-
-
-                          slack                        Assembly slack for pocket depth
-
-                          frame thickness              \-
-
-                          nut thickness                rotary encoder nut thickness
-
-                          centre distance              distance between to rotary encoder rod center
-
-                          encoder width                \-
-
-                          rod diameter                 rotary encoder rod diameter
-
-                          nut edge                     rotary encoder nut edge
-
-                          hole                         rotary encoder rod hole
-
-                          encoder height               \-
-
-                          encoder height below shaft   \-
-
-                          part thickness               front part thickness,\
-                                                       = fastening thickness + thickness + slack.
-
-  Spreadsheet.below       below side thickness         \-
-
-                          screw head diameter          assembly screw head diameter
-
-                          screw head thickness         assembly screw head thickness
-
-                          screw length                 assembly screw length
-
-                          hole diameter                mounting hole diameter
-
-                          PCB center distance 1        biggest distance between 2 PCB (rotary encoder board) mounting hole centers
-
-                          PCB center distance 2        smallest distance between 2 PCB (rotary encoder board) mounting hole centers
-
-                          PCB dimension 1              biggest PCB (rotary encoder board) dimension
-
-                          PCB dimension 2              smallest PCB (rotary encoder board) dimension
-
-                          BeeHive center distance 1    biggest distance between 2 BeeHive board mounting hole centers
-
-                          BeeHive center distance 2    smallest distance between 2 BeeHive board mounting hole centers
-
-                          BeeHive dimension 1          biggest BeeHive board dimension
-
-                          BeeHive dimension 2          smallest BeeHive board dimension
-
-                          PCB gap                      distance between 2 boards
-
-                          rotary encoder thickness     \-
-
-                          RE wire connection depth     volume dedicated to rotary encoder connection wires
-
-                          box depth                    inside box depth,\
-                                                       = rotary encoder thickness + RE wire connection depth + PCB dimension 1 + BeeHive dimension 2 + ULN board dimension2 + 3 \* PCB gap
-
-                          mounting hole diameter       \-
-
-                          below part thickness         \-
-
-                          assembly gap                 gap dedicated to counter 3D printed imprecision and allow by hand assembly
-
-  Spreadsheet.cap         motor cables hole height     rectangle side dimension for motor cables
-
-                          motor cables hole length     rectangle side dimension for motor cables
-
-                          power supply hole            square side dimension for power supply cables
-  ----------------------- ---------------------------- -------------------------------------------------------------------------------------------------------------------------------------
+| ^ | slack | assembly slack for pocket depth |
+| ^ | frame thickness | - |
+| ^ | nut thickness | rotary encoder nut thickness |
+| ^ | centre distance | distance between to rotary encoder rod center |
+| ^ | encoder width | - |
+| ^ | rod diameter | rotary encoder rod diameter |
+| ^ | nut edge | rotary encoder nut edge |
+| ^ | hole | rotary encoder rod hole |
+| ^ | encoder height | - |
+| ^ | encoder height below shaft | - |
+| ^ | part thickness | front part thickness. Equals to fastening thickness + thickness + slack. |
+| Spreadsheet.below | below side thickness | - |
+| ^ | screw head diameter | assembly screw head diameter |
+| ^ | screw head thickness | assembly screw head thickness |
+| ^ | screw length | assembly screw length |
+| ^ | hole diameter | mounting hole diameter |
+| ^ | PCB center distance 1 | biggest distance between 2 PCB (rotary encoder board) mounting hole centers |
+| ^ | PCB center distance 2 | smallest distance between 2 PCB (rotary encoder board) mounting hole centers |
+| ^ | PCB dimension 1 | biggest PCB (rotary encoder board) dimension |
+| ^ | PCB dimension 2 | smallest PCB (rotary encoder board) dimension |
+| ^ | BeeHive center distance 1 | biggest distance between 2 BeeHive board mounting hole centers |
+| ^ | BeeHive center distance 2 | smallest distance between 2 BeeHive board mounting hole centers |
+| ^ | BeeHive dimension 1 | biggest BeeHive board dimension |
+| ^ | BeeHive dimension 2 | smallest BeeHive board dimension |
+| ^ | PCB gap | distance between 2 boards |
+| ^ | rotary encoder thickness | - |
+| ^ | RE wire connection depth | volume dedicated to rotary encoder connection wires |
+| ^ | box depth | inside box depth. Equals to rotary encoder thickness + RE wire connection depth + PCB dimension 1 + BeeHive dimension 2 + ULN board dimension2 + 3 * PCB gap |
+| ^ | mounting hole diameter | - |
+| ^ | below part thickness | - |
+|^| assembly gap | gap dedicated to counter 3D printed imprecision and allow by hand assembly |
+| ^ | motor cables hole height | rectangle side dimension for motor cables |
+| ^ | motor cables hole length | rectangle side dimension for motor cables |
+| ^ | power supply hole | square side dimension for power supply cables |
 
 If you are curious about a specific box feature, please find its design brief on the repository.
 
