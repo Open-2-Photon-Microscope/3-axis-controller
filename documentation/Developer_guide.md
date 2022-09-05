@@ -7,7 +7,7 @@ In this part we will focus on what components were used and why they were used. 
 ### a.  Delta stage
 
 The [OpenFlexure Delta Stage](https://openflexure.org/projects/deltastage/) is an acknowledged open source device initially designed as a microscope stage. Papers about it were published, which means data such as drift, resolution and stability are available. The stage 3-axis translations are controlled via three 28BYJ-48 -- 5V unipolar stepper motors. This is why the code was specifically developed for coil sequences activation of this kind of motors. Openflexure's program is aimed for Arduino, but in order to broaden our target audience, we wrote a Python program, which runs an esp32 microcontroller.
-![test](stepper_motor.png)
+![test](pictures/stepper_motor.png)
 
 ### b.  Electronics
 
