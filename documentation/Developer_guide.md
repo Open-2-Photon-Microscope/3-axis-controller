@@ -52,7 +52,10 @@ It is parametrized, so if you want to customise it, you can open the source file
 | Table name | Parameter | Explanation |
 | ------------- | ------------- | ------------- |
 | Spreadsheet.front | length | box length without taking into account the 2 sides thickness |
-|^ | height  | box height without taking into account the top and below sides thickness |
+| ^ | height  | box height without taking into account the top and below sides thickness |
+| ^ | fastening thickness | thread length |
+| ^ | thickness | pocket depth minus slack |
+| ^ | notch length | - |
 
 
 
