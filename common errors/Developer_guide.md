@@ -17,6 +17,8 @@ If you notice that a circuit isn’t working, although each electrical connectio
 
 ### a.  Running the code
 
-- If the error “pin can only be input” appears, make sure that rotary encoders and motors aren’t connected to any analog pin. The analog pins are located in the “A1”, “A2” and “A3” BeeHive connectors. ![](https://github.com/Open-2-Photon-Microscope/3-axis-controller/blob/main/illustrations/common_errors_1.PNG)
+- If the error “pin can only be input” appears, make sure that rotary encoders and motors aren’t connected to any analog pin. The analog pins are located in the “A1”, “A2” and “A3” BeeHive connectors. 
+![](https://github.com/Open-2-Photon-Microscope/3-axis-controller/blob/main/illustrations/common_errors_1.PNG)
 - If you’re having trouble connecting the esp32, try to close the jupyter notebook and the command prompt windows and start all over again.
-If it persists, you can erase and flash again the esp32. ![](https://github.com/Open-2-Photon-Microscope/3-axis-controller/blob/main/illustrations/common_errors_2.PNG)
+If it persists, you can erase and flash again the esp32. 
+![](https://github.com/Open-2-Photon-Microscope/3-axis-controller/blob/main/illustrations/common_errors_2.PNG)
