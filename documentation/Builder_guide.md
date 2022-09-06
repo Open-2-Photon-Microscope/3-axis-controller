@@ -41,4 +41,4 @@ In case you need to do some functionality tests, you will need some basic electr
 
 ### e.  Programming
 
-To upgrade the code, or understand its structure, you'll need some knowledge in **Python**. We used the **Jupyter Notebook IDE** to develop and run the code on the manipulator.
+To run the code, you'll have to use the **Jupyter Notebook IDE**.
