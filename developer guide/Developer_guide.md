@@ -93,7 +93,7 @@ It is parametrized, so if you want to customise it, you can open the source file
 |  | motor cables hole length | rectangle side dimension for motor cables |
 |  | power supply hole | square side dimension for power supply cables |
 
-If you are curious about a specific box feature, please find its [design brief](https://github.com/Open-2-Photon-Microscope/3-axis-controller/blob/main/developer%20guide/Builder_guide.md) on the repository.
+If you are curious about a specific box feature, please find its [design brief](https://github.com/Open-2-Photon-Microscope/3-axis-controller/blob/main/developer%20guide/Design_brief.md) on the repository.
 
 ## b.  Electronics
 
