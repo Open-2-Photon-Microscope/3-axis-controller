@@ -2,18 +2,20 @@
 
 ## 1.  Bill of materials
 
-In this part we will focus on what components were used and why they were used. Please find the BOM as table format on the repository.
+In this part we will focus on what components were used and why they were used. Please find the [BOM](https://github.com/Open-2-Photon-Microscope/3-axis-controller/tree/main/BOM) as table format on the repository.
 
 ### a.  Delta stage
 
 The [OpenFlexure Delta Stage](https://openflexure.org/projects/deltastage/) is an acknowledged open source device initially designed as a microscope stage. Papers about it were published, which means data such as drift, resolution and stability are available. The stage 3-axis translations are controlled via three 28BYJ-48 -- 5V unipolar stepper motors. This is why the code was specifically developed for coil sequences activation of this kind of motors. Openflexure's program is aimed for Arduino, but in order to broaden our target audience, we wrote a Python program, which runs an esp32 microcontroller.
-![28BYJ-48 stepper motor](pictures/stepper_motor.png)
+
+![28BYJ-48 stepper motor](https://github.com/Open-2-Photon-Microscope/3-axis-controller/blob/main/illustrations/stepper_motor.png)
 
 ### b.  Electronics
-- To connect the Delta Stage to our manipulator, we are using a [BeeHive](https://github.com/amchagas/BeeHive) board. It's a platform using esp32 as microcontroller, which requires a 12 V power input and presents many 5 V outputs to connect devices. Beware about the common connection mistakes you can make using the BeeHive (check "Common mistakes" doc part 1. a.).
+- To connect the Delta Stage to our manipulator, we are using a [BeeHive](https://github.com/amchagas/BeeHive) board. It's a platform using esp32 as microcontroller, which requires a 12 V power input and presents many 5 V outputs to connect devices. Beware about the common connection mistakes you can make using the BeeHive (check [Common errors](https://github.com/Open-2-Photon-Microscope/3-axis-controller/tree/main/common%20errors) doc part 1. a.).
 - The rotary encoders are connected to the BeeHive board through a PCB custom made for this project. It contains pull-up resistors and filter capacitors, which are recommended in the component data sheet for proper operation. There's also a bridge divider reducing the encoder channel signal voltage from 5 V to 3 V for the esp32 power supply.
 - Here is a connection scheme from one rotary encoder to one motor.
-![Electrical connection scheme](pictures/electrical_connections.png)
+
+![Electrical connection scheme](https://github.com/Open-2-Photon-Microscope/3-axis-controller/blob/main/illustrations/electrical_connections.png)
 
 ### c.  Box
 
@@ -91,7 +93,7 @@ It is parametrized, so if you want to customise it, you can open the source file
 |  | motor cables hole length | rectangle side dimension for motor cables |
 |  | power supply hole | square side dimension for power supply cables |
 
-If you are curious about a specific box feature, please find its design brief on the repository.
+If you are curious about a specific box feature, please find its [design brief](https://github.com/Open-2-Photon-Microscope/3-axis-controller/blob/main/developer%20guide/Builder_guide.md) on the repository.
 
 ## b.  Electronics
 
@@ -112,9 +114,8 @@ You can find here two functions: one that assigns channels A and B of each rotar
     - The third one assigns the required motor rotation combination to each translation axis. For example, if the Y-axis rotary encoder sends a clockwise command, motors a and b are going to run -4 steps and motor c 8 steps. This conversion from cartesian to delta movement is explained in d. Kinematics.
 
 - Rotary encoder function
-![Output voltage signal rotary encoder](pictures/signal_rotary_encoder.png)
 
-(Rotary optical encoder from Bourns datasheet)
+![Output voltage signal rotary encoder](https://github.com/Open-2-Photon-Microscope/3-axis-controller/blob/main/illustrations/signal_rotary_encoder.PNG)
 
 This function translates the rotary encoder signal into motor rotations. Channels A and B have square signals, with high (=1) and low (=0) output values. However the signals are slightly delayed one another. The first channel to reach the high output value indicates if the encoder is turned either clockwise or counterclockwise. In order to know which signal is ahead, the code implements two data: the channel value and the channel state. The channel state is the current output value minus the previous one. When this state is equal to 1, it means that the output has changed from high to low. So, if channel A state is 1 and channel B output value is 0, then channel A is the first one to reach high output. This means that the rotary encoder is being turned clockwise. On the contrary, if channel B state is 1 and channel A output value is 0, the rotary encoder is being turned anticlockwise.
 
@@ -128,8 +129,9 @@ The 28byj-48 stepper motor has four coils that can be activated by sequences. De
 
 To reach the sub micron step size, you would have to upgrade the program. We have been focusing on steps (sub micron steps would be called "microsteps"). In order to translate in one axis translation, the Delta Stage requires a specific motor combination. According to the matrix below, one positive unit in the x direction requires -cos30 (= - 0,87) motor a step and one 0,87 motor b step. In order to command a decimal step value you would require PWM. As it lowers the device stability and consumes a lot of energy, we wanted to first test the device with whole steps.
 
-![Motor combination for cartesian translations](pictures/motor_combination.png)
-![Matrix](pictures/matrix.png)
+![Motor combination for cartesian translations](https://github.com/Open-2-Photon-Microscope/3-axis-controller/blob/main/illustrations/motor_combination.PNG)
+
+![Matrix](https://github.com/Open-2-Photon-Microscope/3-axis-controller/blob/main/illustrations/matrix.PNG)
 
 The littlest multiple that would allow a complete whole number step value combination is 8. This way, the new motor step is 1,44°, so 250 steps would complete a whole motor shaft rotation.
 
