@@ -8,7 +8,7 @@ In this part we will focus on what components were used and why they were used. 
 
 The [OpenFlexure Delta Stage](https://openflexure.org/projects/deltastage/) is an acknowledged open source device initially designed as a microscope stage. Papers about it were published, which means data such as drift, resolution and stability are available. The stage 3-axis translations are controlled via three 28BYJ-48 -- 5V unipolar stepper motors. This is why the code was specifically developed for coil sequences activation of this kind of motors. Openflexure's program is aimed for Arduino, but in order to broaden our target audience, we wrote a Python program, which runs an esp32 microcontroller.
 
-![28BYJ-48 stepper motor](https://github.com/Open-2-Photon-Microscope/3-axis-controller/blob/main/illustrations/stepper_motor.png = 250x)
+![28BYJ-48 stepper motor](https://github.com/Open-2-Photon-Microscope/3-axis-controller/blob/main/illustrations/stepper_motor.png)
 
 ### b.  Electronics
 - To connect the Delta Stage to our manipulator, we are using a [BeeHive](https://github.com/amchagas/BeeHive) board. It's a platform using esp32 as microcontroller, which requires a 12 V power input and presents many 5 V outputs to connect devices. Beware about the common connection mistakes you can make using the BeeHive (check [Common errors](https://github.com/Open-2-Photon-Microscope/3-axis-controller/tree/main/common%20errors) doc part 1. a.).
