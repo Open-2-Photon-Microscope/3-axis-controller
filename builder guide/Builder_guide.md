@@ -44,3 +44,7 @@ In case you need to do some functionality tests, you will need some basic electr
 ### e.  Programming
 
 To run the code, you'll have to use the **Jupyter Notebook IDE**.
+
+## 3.  Assembly guide
+
+Work in progress
