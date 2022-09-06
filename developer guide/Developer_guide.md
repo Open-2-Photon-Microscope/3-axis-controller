@@ -8,7 +8,7 @@ In this part we will focus on what components were used and why they were used. 
 
 The [OpenFlexure Delta Stage](https://openflexure.org/projects/deltastage/) is an acknowledged open source device initially designed as a microscope stage. Papers about it were published, which means data such as drift, resolution and stability are available. The stage 3-axis translations are controlled via three 28BYJ-48 -- 5V unipolar stepper motors. This is why the code was specifically developed for coil sequences activation of this kind of motors. Openflexure's program is aimed for Arduino, but in order to broaden our target audience, we wrote a Python program, which runs an esp32 microcontroller.
 
-![28BYJ-48 stepper motor](https://github.com/Open-2-Photon-Microscope/3-axis-controller/blob/main/illustrations/stepper_motor.png)
+![28BYJ-48 stepper motor](https://github.com/Open-2-Photon-Microscope/3-axis-controller/blob/main/illustrations/stepper_motor.png | width=100)
 
 ### b.  Electronics
 - To connect the Delta Stage to our manipulator, we are using a [BeeHive](https://github.com/amchagas/BeeHive) board. It's a platform using esp32 as microcontroller, which requires a 12 V power input and presents many 5 V outputs to connect devices. Beware about the common connection mistakes you can make using the BeeHive (check [Common errors](https://github.com/Open-2-Photon-Microscope/3-axis-controller/tree/main/common%20errors) doc part 1. a.).
@@ -166,5 +166,6 @@ Have a look at the [github projects](https://github.com/Open-2-Photon-Microscope
 ## 5.  Documentation/references
 
 ### a.  Delta Stage
-- McDermott, S., Ayazi, F., Collins, J., Knapper, J., Stirling, J., Bowman, R., & Cicuta, P. «Multimodal microscopy imaging with the OpenFlexure Delta Stage.» *Optics Express*, 2022.
-- James P. Sharkey, Darryl C. W. Foo, Alexandre Kabla, et al. «A one-piece 3D printed flexure translation stage for open-source microscopy.» *Review of Scientific Instruments*, 2016.
+- James P. Sharkey, Darryl C. W. Foo, Alexandre Kabla, et al. «A one-piece 3D printed flexure translation stage for open-source microscopy.» *Review of Scientific Instruments*, 2016. https://doi.org/10.1063/1.4941068
+- McDermott, S., Ayazi, F., Collins, J., Knapper, J., Stirling, J., Bowman, R., & Cicuta, P. «Multimodal microscopy imaging with the OpenFlexure Delta Stage.» *Optics Express*, 2022. https://doi.org/10.1364/OE.450211
+
