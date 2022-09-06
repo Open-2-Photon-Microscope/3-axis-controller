@@ -11,7 +11,7 @@ The [OpenFlexure Delta Stage](https://openflexure.org/projects/deltastage/) is a
 ![28BYJ-48 stepper motor](https://github.com/Open-2-Photon-Microscope/3-axis-controller/blob/main/illustrations/stepper_motor.png)
 
 ### b.  Electronics
-- To connect the Delta Stage to our manipulator, we are using a [BeeHive](https://github.com/amchagas/BeeHive) board. It's a platform using esp32 as microcontroller, which requires a 12 V power input and presents many 5 V outputs to connect devices. Beware about the common connection mistakes you can make using the BeeHive (check [Common errors](https://github.com/Open-2-Photon-Microscope/3-axis-controller/tree/main/common%20errors) doc part 1. a.).
+- To connect the Delta Stage to our manipulator, we are using a [BeeHive](https://github.com/amchagas/BeeHive) board. It's a platform using esp32 as microcontroller, which requires a 12 V power input and presents many 5 V outputs to connect devices. Beware about the common connection mistakes you can make using the BeeHive (check [Common errors](https://github.com/Open-2-Photon-Microscope/3-axis-controller/blob/main/common%20errors/Common_errors.md) doc part 1. a.).
 - The rotary encoders are connected to the BeeHive board through a PCB custom made for this project. It contains pull-up resistors and filter capacitors, which are recommended in the component data sheet for proper operation. There's also a bridge divider reducing the encoder channel signal voltage from 5 V to 3 V for the esp32 power supply.
 - Here is a connection scheme from one rotary encoder to one motor.
 
