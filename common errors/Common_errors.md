@@ -4,7 +4,7 @@
 
 ### a.  BeeHive / esp32
 
-- Don’t power the Beehive with the micro usb cable only. Always use simultaneously the 12 V power supply and the 5 V micro usb power supply.
+- Don’t power the BeeHive board with the micro usb cable only. Always use simultaneously the 12 V power supply and the 5 V micro usb power supply.
 - Don’t use the analog pins called “A1”, “A2” and “A3”.
 - Don’t use the pins 0 and 4 when you are connected to the computer via usb connection.
 
@@ -21,7 +21,7 @@ If you notice that a circuit isn’t working, although each electrical connectio
 
 ![](https://github.com/Open-2-Photon-Microscope/3-axis-controller/blob/main/illustrations/common_errors_1.PNG)
 
-- If you’re having trouble connecting the esp32, try to close the jupyter notebook and the command prompt windows and start all over again.
+- If you’re having trouble connecting the esp32, try to close the jupyter notebook and the command prompt and start all over again.
 If it persists, you can erase and flash again the esp32. 
 
 ![](https://github.com/Open-2-Photon-Microscope/3-axis-controller/blob/main/illustrations/common_errors_2.PNG)
