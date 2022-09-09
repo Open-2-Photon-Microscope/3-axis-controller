@@ -4,11 +4,10 @@
 ;To connect  electronics together;Connector header XH Top 4POS 2,5mm male pin;B4B-XH-A(LF)(SN);JST; £0,01 ; £0,11 ;9;;https://www.digikey.co.uk/en/products/detail/jst-sales-america-inc/B4B-XH-A-LF-SN/1651047
 ;;Connector rcpt hsg 4POS 2,5mm female socket;XHP-4;JST; £0,06 ; £0,54 ;9;;https://www.digikey.co.uk/en/products/detail/jst-sales-america-inc/XHP-4/683353
 ;;Beehive board;;; £25,00 ; £25,00 ;1;Open source hardware;https://github.com/amchagas/BeeHive
-;;ESP32 WROOM-32 38 pins Development Board Dual Core;-;-; £6,59 ; £6,59 ;1;;NodeMcu ESP32 WROOM-32 38 pins Development Board Dual Core WLAN WiFi Bluetooth | eBay
-;;"JUMPER SXH-001T-P0.6 X2 10""";ASXHSXH22K254;JST; £0,54 ; £16,20 ;30;;https://www.digikey.co.uk/en/products/detail/jst-sales-america-inc/ASXHSXH22K254/9961919?s=N4IgTCBcDaICwFYEFo5jAZmQOQCIgF0BfIA
+;;ESP32 WROOM-32 38 pins Development Board Dual Core;-;-; £6,59 ; £6,59 ;1;;NodeMcu ESP32 WROOM-32 38 pins Development Board Dual Core WLAN WiFi Bluetooth eBay
+;;"JUMPER SXH-001T-P0.6 X2 10";ASXHSXH22K254;JST; £0,54 ; £16,20 ;30;;https://www.digikey.co.uk/en/products/detail/jst-sales-america-inc/ASXHSXH22K254/9961919?s=N4IgTCBcDaICwFYEFo5jAZmQOQCIgF0BfIA
 ;;Step-down regulator;LM2596T-5.0/NOPB;Texas Instrument; £0,04 ; £0,08 ;2;;https://www.ti.com/product/LM2596/part-details/LM2596T-5.0/NOPB
-;;Inductor 33µH Neosid MA-Bs75;"	
-RLB0914-330KL";Bourns; £0,43 ; £0,43 ;1;;https://www.digikey.com/en/products/detail/bourns-inc/RLB0914-330KL/2561360
+;;Inductor 33µH Neosid MA-Bs75;"RLB0914-330KL";Bourns; £0,43 ; £0,43 ;1;;https://www.digikey.com/en/products/detail/bourns-inc/RLB0914-330KL/2561360
 ;;"	Diode Schottky 5A DO-201AD";1N5822-E3/73;Vishay; £0,39 ; £0,39 ;1;;https://www.digikey.com/en/products/detail/vishay-general-semiconductor-diodes-division/1N5822-E3-73/2139982
 ;;680µF Capacitor;16ZL680MEFC10X16;Rubycon; £0,63 ; £0,63 ;1;;https://www.digikey.co.uk/en/products/detail/rubycon/16ZL680MEFC10X16/3563708
 ;;CAP ALUM 220UF 20% 25V RADIAL;"	EEU-FM1E221";Panasonic ; £0,52 ; £0,52 ;1;;https://www.digikey.co.uk/en/products/detail/panasonic-electronic-components/EEU-FM1E221/613744

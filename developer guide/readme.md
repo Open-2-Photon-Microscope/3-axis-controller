@@ -1,4 +1,4 @@
-# Developer guide
+# Builder guide
 
 ## 1.  Bill of materials
 
@@ -8,20 +8,20 @@ In this part we will focus on what components were used and why they were used. 
 
 The [OpenFlexure Delta Stage](https://openflexure.org/projects/deltastage/) is an acknowledged open source device initially designed as a microscope stage. Papers about it were published, which means data such as drift, resolution and stability are available. The stage 3-axis translations are controlled via three 28BYJ-48 -- 5V unipolar stepper motors. This is why the code was specifically developed for coil sequences activation of this kind of motors. Openflexure's program is aimed for Arduino, but in order to broaden our target audience, we wrote a Python program, which runs an esp32 microcontroller.
 
-![28BYJ-48 stepper motor](https://github.com/Open-2-Photon-Microscope/3-axis-controller/blob/main/illustrations/stepper_motor.png)
+![28BYJ-48 stepper motor](https://github.com/Open-2-Photon-Microscope/3-axis-controller/blob/main/illustrations/stepper_motor.png "28BYJ-48 stepper motor")
 
 ### b.  Electronics
 - To connect the Delta Stage to our manipulator, we are using a [BeeHive](https://github.com/amchagas/BeeHive) board. It's a platform using esp32 as microcontroller, which requires a 12 V power input and presents many 5 V outputs to connect devices. Beware about the common connection mistakes you can make using the BeeHive (check [Common errors](https://github.com/Open-2-Photon-Microscope/3-axis-controller/blob/main/common%20errors/Common_errors.md) doc part 1. a.).
 - The rotary encoders are connected to the BeeHive board through a PCB custom made for this project. It contains pull-up resistors and filter capacitors, which are recommended in the component data sheet for proper operation. There's also a bridge divider reducing the encoder channel signal voltage from 5 V to 3 V for the esp32 power supply.
 - Here is a connection scheme from one rotary encoder to one motor.
 
-![Electrical connection scheme](https://github.com/Open-2-Photon-Microscope/3-axis-controller/blob/main/illustrations/electrical_connections.png)
+![Electrical connection scheme](https://github.com/Open-2-Photon-Microscope/3-axis-controller/blob/main/illustrations/electrical_connections.png "Electrical connection scheme")
 
 ### c.  Box
 
 The electrical connections above-mentioned are contained in a box. This box is also the concrete outcome users are going to interact with to control the delta stage. It can be 3D printed (FFF) with PLA, and requires about 350 g of material. To assemble the PCBs in it, you will need :
-- x 56 M3 nuts
-- x 28 M3 screws, 6 mm below head length, Ø5 mm head diameter
+- 56 x M3 nuts
+- 28 x M3 screws, 6 mm below head length, Ø5 mm head diameter
 
 ## 2.  Bill of tools and skills
 
@@ -31,7 +31,7 @@ To update the design, you will need **FreeCAD** software. It's better if you're 
 
 ### b.  FFF 3D printer
 
-We sliced the part via **PrusaSlicer**, setting the layer height to 0,20 mm. It is made out of three independant parts : front, below, cap and frame. You can download the four stl files from the Github repo. The only part that requires a bit of support is the cap. An infill of 15% is enough, and could even be lightly reduced.
+We sliced the part via **PrusaSlicer**, setting the layer height to 0,20 mm. It is made out of four independent parts : front, frame, below and rear. You can download the four stl files from the GitHub repo. The only part that requires a bit of support is the cap. An infill of 15% is enough, and could even be lightly reduced.
 
 ### c.  Soldering bench
 
@@ -44,6 +44,9 @@ In case you need to do some functionality tests, you will need some basic electr
 ### e.  Programming
 
 To upgrade the code, or understand its structure, you'll need some knowledge in **Python**. We used the **Jupyter Notebook IDE** to develop and run the code on the manipulator.
+
+
+# Developer guide
 
 ## 3.  How has the project been developed ?
 
@@ -115,7 +118,7 @@ You can find here two functions: one that assigns channels A and B of each rotar
 
 - Rotary encoder function
 
-![Output voltage signal rotary encoder](https://github.com/Open-2-Photon-Microscope/3-axis-controller/blob/main/illustrations/signal_rotary_encoder.PNG)
+![Output voltage signal rotary encoder](https://github.com/Open-2-Photon-Microscope/3-axis-controller/blob/main/illustrations/signal_rotary_encoder.PNG "Output voltage signal rotary encoder")
 
 This function translates the rotary encoder signal into motor rotations. Channels A and B have square signals, with high (=1) and low (=0) output values. However the signals are slightly delayed one another. The first channel to reach the high output value indicates if the encoder is turned either clockwise or counterclockwise. In order to know which signal is ahead, the code implements two data: the channel value and the channel state. The channel state is the current output value minus the previous one. When this state is equal to 1, it means that the output has changed from high to low. So, if channel A state is 1 and channel B output value is 0, then channel A is the first one to reach high output. This means that the rotary encoder is being turned clockwise. On the contrary, if channel B state is 1 and channel A output value is 0, the rotary encoder is being turned anticlockwise.
 
@@ -129,9 +132,9 @@ The 28byj-48 stepper motor has four coils that can be activated by sequences. De
 
 To reach the sub micron step size, you would have to upgrade the program. We have been focusing on steps (sub micron steps would be called "microsteps"). In order to translate in one axis translation, the Delta Stage requires a specific motor combination. According to the matrix below, one positive unit in the x direction requires -cos30 (= - 0,87) motor a step and one 0,87 motor b step. In order to command a decimal step value you would require PWM. As it lowers the device stability and consumes a lot of energy, we wanted to first test the device with whole steps.
 
-![Motor combination for cartesian translations](https://github.com/Open-2-Photon-Microscope/3-axis-controller/blob/main/illustrations/motor_combination.PNG)
+![Motor combination for cartesian translations](https://github.com/Open-2-Photon-Microscope/3-axis-controller/blob/main/illustrations/motor_combination.PNG "Motor combination for cartesian translations, from *Multimodal microscopy imaging with the OpenFlexure Delta Stage*")
 
-![Matrix](https://github.com/Open-2-Photon-Microscope/3-axis-controller/blob/main/illustrations/matrix.PNG)
+![Matrix](https://github.com/Open-2-Photon-Microscope/3-axis-controller/blob/main/illustrations/matrix.PNG "Matrix, from *Multimodal microscopy imaging with the OpenFlexure Delta Stage*")
 
 The littlest multiple that would allow a complete whole number step value combination is 8. This way, the new motor step is 1,44°, so 250 steps would complete a whole motor shaft rotation.
 
@@ -143,6 +146,9 @@ The littlest multiple that would allow a complete whole number step value combin
 || 0,72° |
 | 0,87 = cos30 | 6,96 ≈ 7 steps |
 || 1,25° |
+
+The new change of basis can now be written:
+![Change of basis](https://github.com/Open-2-Photon-Microscope/3-axis-controller/blob/main/illustrations/change_basis.PNG "Change of basis") 
 
 ## 4.  Current state of development
 
