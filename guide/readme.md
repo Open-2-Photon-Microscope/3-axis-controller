@@ -148,6 +148,7 @@ The littlest multiple that would allow a complete whole number step value combin
 || 1,25° |
 
 The new change of basis can now be written:
+
 ![Change of basis](https://github.com/Open-2-Photon-Microscope/3-axis-controller/blob/main/illustrations/change_basis.PNG "Change of basis") 
 
 ## 4.  Current state of development
