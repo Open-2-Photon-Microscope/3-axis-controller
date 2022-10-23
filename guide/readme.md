@@ -2,7 +2,7 @@
 <summary>Summary</summary>
 
     
-<details open>
+<details>
 <summary>Builder guide</summary>
 
 * Bill of materials
@@ -18,7 +18,7 @@
 
 </details>
 
-<details open>
+<details>
 <summary>Developer guide</summary>
 
 * How has the project been developed ?
