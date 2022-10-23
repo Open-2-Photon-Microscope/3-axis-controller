@@ -3,7 +3,7 @@
 
     
 <details open>
-<summary> [Builder guide](https://github.com/Open-2-Photon-Microscope/3-axis-controller/tree/main/guide#builder-guide) </summary>
+<summary>[Builder guide](https://github.com/Open-2-Photon-Microscope/3-axis-controller/tree/main/guide#builder-guide)</summary>
 
 * Bill of materials
 * Bill of tools and skills
