@@ -3,10 +3,18 @@
 
     
 <details open>
-<summary>[Builder guide](https://github.com/Open-2-Photon-Microscope/3-axis-controller/tree/main/guide#builder-guide)</summary>
+<summary>Builder guide</summary>
 
 * Bill of materials
+    * Delta stage
+    * Electronics
+    * Box
 * Bill of tools and skills
+    * CAD
+    * FFF 3D printer
+    * Soldering bench
+    * Electronic bench
+    * Programming
 
 </details>
 
@@ -14,7 +22,13 @@
 <summary>Developer guide</summary>
 
 * How has the project been developed ?
+    * The box CAD
+    * Electronics
+    * Code
+    * Kinematics
 * Current state of development
+    * Tasks currently worked on
+    * Open task priorities
 * Documentation/references
 
 </details> 
