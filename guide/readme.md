@@ -1,23 +1,24 @@
 <details open>
 <summary>Summary</summary>
 
+    
 <details open>
-<summary>Builder guide</summary>
+<summary> [Builder guide](https://github.com/Open-2-Photon-Microscope/3-axis-controller/tree/main/guide#builder-guide) </summary>
 
-* Vegetables
-* Fruits
-* Fish
+* Bill of materials
+* Bill of tools and skills
 
 </details>
 
 <details open>
 <summary>Developer guide</summary>
 
-* Vegetables
-* Fruits
-* Fish
+* How has the project been developed ?
+* Current state of development
+* Documentation/references
 
 </details> 
+
     
 </details>
 
