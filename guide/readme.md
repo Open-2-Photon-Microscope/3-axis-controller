@@ -1,4 +1,13 @@
-# Builder guide
+# Guide
+
+<details open>
+<summary>## Shopping list</summary>
+
+* Vegetables
+* Fruits
+* Fish
+
+</details>
 
 ## 1.  Bill of materials
 
