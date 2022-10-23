@@ -1,13 +1,28 @@
-# Guide
+<details open>
+<summary>Summary</summary>
 
 <details open>
-<summary>## Shopping list</summary>
+<summary>Builder guide</summary>
 
 * Vegetables
 * Fruits
 * Fish
 
 </details>
+
+<details open>
+<summary>Developer guide</summary>
+
+* Vegetables
+* Fruits
+* Fish
+
+</details> 
+    
+</details>
+
+
+#  Builder guide
 
 ## 1.  Bill of materials
 
