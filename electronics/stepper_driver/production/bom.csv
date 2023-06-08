@@ -1,4 +1,5 @@
 Designator,Footprint,Quantity,Value,LCSC Part #
+J2,JST_XH_S5B-XH-A_1x05_P2.50mm_Horizontal,1,Conn_01x05_Female,
 H1,MountingHole_3.2mm_M3,1,MountingHole,
 J6,JST_XH_S5B-XH-A_1x05_P2.50mm_Horizontal,1,Conn_01x05_Female,
 U2,DIP-16_W7.62mm_Socket_LongPads,1,ULN2003,
@@ -9,7 +10,6 @@ H3,MountingHole_3.2mm_M3,1,MountingHole,
 J4,JST_XH_S5B-XH-A_1x05_P2.50mm_Horizontal,1,Conn_01x05_Female,
 J8,JST_XH_S4B-XH-A-1_1x04_P2.50mm_Horizontal,1,Conn_01x04_Female,
 J1,JST_XH_S4B-XH-A-1_1x04_P2.50mm_Horizontal,1,Conn_01x04_Female,
-J2,JST_XH_S5B-XH-A_1x05_P2.50mm_Horizontal,1,Conn_01x05_Female,
 J5,JST_XH_S4B-XH-A-1_1x04_P2.50mm_Horizontal,1,Conn_01x04_Female,
 H2,MountingHole_3.2mm_M3,1,MountingHole,
 C1,C_Disc_D6.0mm_W4.4mm_P5.00mm,1,C_Small,
