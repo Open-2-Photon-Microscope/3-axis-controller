@@ -404,7 +404,7 @@
     "pinned_symbol_libs": []
   },
   "meta": {
-    "filename": "stepper_driver.kicad_pro",
+    "filename": "board2.kicad_pro",
     "version": 1
   },
   "net_settings": {
@@ -421,7 +421,7 @@
         "name": "Default",
         "pcb_color": "rgba(0, 0, 0, 0.000)",
         "schematic_color": "rgba(0, 0, 0, 0.000)",
-        "track_width": 0.25,
+        "track_width": 0.5,
         "via_diameter": 0.8,
         "via_drill": 0.4,
         "wire_width": 6
@@ -485,7 +485,7 @@
   },
   "sheets": [
     [
-      "e63e39d7-6ac0-4ffd-8aa3-1841a4541b55",
+      "1495650d-f633-4c0c-b094-1f8a78bf68a4",
       ""
     ]
   ],
