@@ -17,10 +17,11 @@ class Stage():
         self.Y_pos:float = Y_pos
         self.Z_pos:float = Z_pos
         
+        self.sf = 2 # scale factor ie steps per um
         # I2C Screen
         self.lcd = screen.lcd
         self.lcd.begin()
-        self.lcd.blink() ## remove once done fixing bugs
+        ##self.lcd.blink() ## remove once done fixing bugs
         self.x_string = 'X:     '
         self.y_string = 'Y:     '
         self.z_string = 'Z:     '
@@ -106,13 +107,13 @@ class Stage():
             self.X_pos += vector[0]
             self.Y_pos += vector[1]
             self.Z_pos += vector[2]
-            print_x = self.X_pos
-            print_y = self.Y_pos
-            print_z = self.Z_pos
+            print_x = self.X_pos / self.sf
+            print_y = self.Y_pos / self.sf
+            print_z = self.Z_pos / self.sf
         else:
-            print_x = vector[0]
-            print_y = vector[1]
-            print_z = vector[2]
+            print_x = vector[0] / self.sf
+            print_y = vector[1] / self.sf
+            print_z = vector[2] / self.sf
             
         #TODO: tidy up this bit
         self.x_string = 'X:' + str(print_x)[:6]
@@ -173,7 +174,7 @@ class Stage():
             if self.start_pin.value() == 1 and self.stop_pin.value() == 0:
                 time.sleep_ms(300)
                 self.lcd.set_cursor(9,1)
-                self.lcd.print('#MANUAL')
+                self.lcd.print('CONTROL')
                 coords = self.c.run(position=[self.X_pos,
                                                 self.Y_pos,
                                                 self.Z_pos])
@@ -182,8 +183,10 @@ class Stage():
                 #self.update_pos(coords)
                 time.sleep_ms(100)
             time.sleep_ms(200)
-            print(self.start_pin.value(), self.stop_pin.value())
+            #print(self.start_pin.value(), self.stop_pin.value())
         print('both buttons pressed')
+        self.lcd.set_cursor(11,1)
+        self.lcd.print('#STOP')
 
 stage = Stage()
 

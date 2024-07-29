@@ -3,6 +3,7 @@
 #esp.osdebug(None)
 #import webrepl
 #webrepl.start()
-from main import *
-print(welcome)
-#moveOnWake()
+
+from cart_del import stage
+
+stage.use_controller()

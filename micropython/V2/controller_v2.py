@@ -8,11 +8,13 @@ class controller():
     def __init__(self,
                  start_pin=Pin(36,Pin.IN),
                  stop_pin=Pin(39,Pin.IN),
-                 display=lcd
+                 display=lcd,
+                 scale_factor=2
                  ):
         self.start_pin = start_pin
         self.stop_pin = stop_pin
         self.display = display
+        self.sf = scale_factor # how many steps per um
         
         self.x_control = RotaryIRQ(pin_num_clk=34, 
                                     pin_num_dt=35, 
@@ -62,13 +64,13 @@ class controller():
                 old_pos = new_pos
                 print('X,Y,Z:  ', new_pos)
                 
-                x_string = 'X:' + str(new_pos[0])[:6] # Take only 5 or 6 SF
+                x_string = 'X:' + str(new_pos[0]/self.sf)[:6] # Take only 5 or 6 SF
                 x_string = x_string + ' '*(8-len(x_string)) # Pad string to length 8 - avoids .clear() making screen flicker
                 
-                y_string = 'Y:' + str(new_pos[1])[:6]
+                y_string = 'Y:' + str(new_pos[1]/self.sf)[:6]
                 y_string = y_string + ' '*(8-len(y_string))
                 
-                z_string = 'Z:' + str(new_pos[2])[:5]
+                z_string = 'Z:' + str(new_pos[2]/self.sf)[:5]
                 z_string = z_string + ' '*(7-len(z_string))
                 
                 # Update display screen
@@ -79,7 +81,7 @@ class controller():
                 self.display.set_cursor(0,1)
                 self.display.print(y_string)
                 self.display.set_cursor(9,1)
-                self.display.print('#MANUAL')
+                self.display.print('CONTROL')
                 
             if self.start_pin.value()==1:
                 accept = True

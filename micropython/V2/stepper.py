@@ -1,3 +1,5 @@
+# Taken from https://gist.github.com/nickovs/23928a8591735b00b00654fa628302d5
+
 # stepper.py
 
 # A micropython driver for 4-phase, unipolar stepper motors such as

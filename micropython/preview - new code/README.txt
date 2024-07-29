@@ -1,1 +1,0 @@
-Install i2c display library from https://pypi.org/project/micropython-i2c-lcd/
