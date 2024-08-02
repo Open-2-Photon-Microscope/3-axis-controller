@@ -34,7 +34,7 @@ class controller():
                                     pin_num_dt=14, 
                                     min_val=0, 
                                     max_val=10000, 
-                                    reverse=False, 
+                                    reverse=True, 
                                     range_mode=RotaryIRQ.RANGE_UNBOUNDED)
         
     def run(self, position=[0,0,0]):

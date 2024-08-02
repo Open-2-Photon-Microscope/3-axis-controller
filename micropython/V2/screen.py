@@ -2,8 +2,8 @@ from lcd_i2c import LCD
 from machine import I2C, Pin
 
 # Define custom pins for SCL and SDA
-scl_pin = Pin(32)  # Replace with your desired SCL pin
-sda_pin = Pin(33)  # Replace with your desired SDA pin
+scl_pin = Pin(33)  # Replace with your desired SCL pin
+sda_pin = Pin(32)  # Replace with your desired SDA pin
 
 
 
