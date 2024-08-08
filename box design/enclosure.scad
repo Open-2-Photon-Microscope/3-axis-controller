@@ -14,19 +14,24 @@ module base(x, y, h=5){
 
 //base(75,32); // lcd
 
-module screw_post(height){
-    nut_h = 2.8;
+module screw_post(height, nut_h=2.8){
     translate([0,0,height/2])difference(){
+        
+        // shell
         cube([8,8,height],center=true);
+        // cutouts
         union(){
             // nut
-            translate([0,0,height/2-3])cylinder(d=6.3, h= nut_h, center=true,$fn=6);
+            translate([0,0,height/2-3])cylinder(d=6.95, h= nut_h, center=true,$fn=6);
+            
             // center hole
             cylinder(d=3.4, h= height, center=true, $fn=18);
+            
             // side exit
-            translate([-5,0,height/2-3])cube([10,5.45,nut_h],center=true);
+            translate([-5,0,height/2-3])cube([10,6,nut_h],center=true);
+            
             // overhang trick
-            translate([0,0,height/2-1.6])cube([3.3,5.45,0.3],center=true);
+            translate([0,0,height/2-1.6])cube([3.4,6,0.3],center=true);
         }
         
     }// end difference
@@ -41,7 +46,7 @@ module top_lvl(x, y, z, h){
     translate([0,0,z/2])difference(){
         cube([x, y, z], center=true);
         union(){
-            translate([25,0,0])lcd();
+            translate([25,0,0.75])lcd();
             translate([enj_x,enj_y,enj_depth])ena1j();
             translate([enj_x,0,enj_depth])ena1j();
             translate([enj_x,-1*enj_y,enj_depth])ena1j();
@@ -70,7 +75,7 @@ module ena1j(){ // model of the rotary encoder
 
 module lcd(){
     // screen
-    cube([24.5,71.5,6.6],center=true);
+    cube([24.5,71.5,8],center=true);
     
     // space for soldered pins
     translate([(24.5+6.6)/2,71.5/2-42/2,-3.3/2])cube([6.6,42,3.3],center=true);
@@ -80,9 +85,9 @@ module lcd(){
     
     //screw holes
     translate([16,75/2,0])cylinder(d=3.4,h=15, center=true, $fn=18);
-    translate([-16,75/2,0])cylinder(d=3.4,h=15, center=true, $fn=18);
+    translate([-15,75/2,0])cylinder(d=3.4,h=15, center=true, $fn=18);
     translate([16,-75/2,0])cylinder(d=3.4,h=15, center=true, $fn=18);
-    translate([-16,-75/2,0])cylinder(d=3.4,h=15, center=true, $fn=18);
+    translate([-15,-75/2,0])cylinder(d=3.4,h=15, center=true, $fn=18);
 }// end lcd
 
 //lcd();
