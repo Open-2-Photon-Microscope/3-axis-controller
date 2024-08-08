@@ -69,9 +69,16 @@ module ena1j(){ // model of the rotary encoder
 //ena1j();
 
 module lcd(){
+    // screen
     cube([24.5,71.5,6.6],center=true);
+    
+    // space for soldered pins
     translate([(24.5+6.6)/2,71.5/2-42/2,-3.3/2])cube([6.6,42,3.3],center=true);
-    translate([0,(71.5+4.6)/2,2.85/2-3.3])cube([24.5,4.6,2.85],center=true);
+    
+    // space for part of backlight
+    translate([0,(71.5+4.6)/-2,2.85/2-3.3])cube([24.5,4.6,2.85],center=true);
+    
+    //screw holes
     translate([16,75/2,0])cylinder(d=3.4,h=15, center=true, $fn=18);
     translate([-16,75/2,0])cylinder(d=3.4,h=15, center=true, $fn=18);
     translate([16,-75/2,0])cylinder(d=3.4,h=15, center=true, $fn=18);
@@ -81,7 +88,7 @@ module lcd(){
 //lcd();
 
 module pwr_switch(){
-    cube([12.85, 7,8.9],center=true);
+    cube([13, 7,8.9],center=true);
     translate([0,0,8.9/2])cylinder(d=6.8,h=8.9,$fn=25);
     translate([6.1,0,8.9/2])cylinder(d=2.5,h=3,$fn=18);
 }// end module pwr_switch
