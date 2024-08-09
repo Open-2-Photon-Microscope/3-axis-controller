@@ -25,7 +25,7 @@ module screw_post(height, nut_h=2.8){
             translate([0,0,height/2-3])cylinder(d=6.95, h= nut_h, center=true,$fn=6);
             
             // center hole
-            cylinder(d=3.4, h= height, center=true, $fn=18);
+            translate([0,0,-height/4])cylinder(d=3.4, h= height, $fn=18);
             
             // side exit
             translate([-5,0,height/2-3])cube([10,6,nut_h],center=true);
@@ -42,17 +42,24 @@ module screw_post(height, nut_h=2.8){
 module top_lvl(x, y, z, h){
     enj_depth = -8;
     enj_x = -30;
-    enj_y = 25;
+    enj_y = 35;
     translate([0,0,z/2])difference(){
         cube([x, y, z], center=true);
         union(){
             translate([25,0,0.75])lcd();
+            
+            translate([5,-5,0]){ // ena1j encoders
             translate([enj_x,enj_y,enj_depth])ena1j();
             translate([enj_x,0,enj_depth])ena1j();
             translate([enj_x,-1*enj_y,enj_depth])ena1j();
+            }// end translate
+            
             translate([25,-48,-3.5])pwr_switch();
+            
+            translate([5,0,0]){ // push switches
             translate([0,48,-3.2])push_switch();
             translate([-20,48,-3.2])push_switch();
+            }// end translate
         }//end union
         }//end difference
         rotate([180,0,0])base(91,101,h);// end rotate
@@ -87,7 +94,7 @@ module lcd(){
     translate([16,75/2,0])cylinder(d=3.4,h=15, center=true, $fn=18);
     translate([-15,75/2,0])cylinder(d=3.4,h=15, center=true, $fn=18);
     translate([16,-75/2,0])cylinder(d=3.4,h=15, center=true, $fn=18);
-    translate([-15,-75/2,0])cylinder(d=3.4,h=15, center=true, $fn=18);
+    translate([-15 ,-75/2,0])cylinder(d=3.4,h=15, center=true, $fn=18);
 }// end lcd
 
 //lcd();
