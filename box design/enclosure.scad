@@ -39,6 +39,16 @@ module screw_post(height, nut_h=2.8){
 
 //screw_post(10);
 
+module bars(x, y, z, w=8){
+    translate([x/2,0,z])cube([w,y,w],center=true);
+    translate([-x/2,0,z])cube([w,y,w],center=true);
+    translate([0,y/2,z])cube([x,w,w],center=true);
+    
+    //translate([])cube();
+}//end module
+
+//bars(91,101,-15);
+
 module top_lvl(x, y, z, h){
     enj_depth = -8;
     enj_x = -30;
@@ -66,7 +76,7 @@ module top_lvl(x, y, z, h){
         
 }//end module top_lvl
 
-top_lvl(100,114,5,40);
+//top_lvl(100,114,5,45);
 
 module ena1j(){ // model of the rotary encoder
     cube([21.5,16,18.5],center=true);
@@ -113,3 +123,14 @@ module push_switch(){
 }//end module push_switch
 
 //push_switch();
+
+module feet(d, screw_d, head_d, h){
+    $fn = 28;
+    difference(){
+        cylinder(d=d, h=h);
+        cylinder(d = screw_d, h=h);
+        cylinder(d=head_d, h=h*2/3);
+    }//end difference
+}// end module feet
+
+feet(8, 3.4, 5.6, 5);
