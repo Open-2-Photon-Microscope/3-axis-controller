@@ -46,7 +46,7 @@ class controller():
         # Controller values will start at current position
         # method returns co-ordinates to be fed into .move_to()
         
-        self.step_size = self.set_step_size()
+        # self.step_size = self.set_step_size()
         self.x_control._incr = self.step_size*self.sf
         self.y_control._incr = self.step_size*self.sf
         self.z_control._incr = self.step_size*self.sf
