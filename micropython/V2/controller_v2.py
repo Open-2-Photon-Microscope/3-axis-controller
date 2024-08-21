@@ -47,9 +47,9 @@ class controller():
         # method returns co-ordinates to be fed into .move_to()
         
         # self.step_size = self.set_step_size()
-        self.x_control._incr = self.step_size*self.sf
-        self.y_control._incr = self.step_size*self.sf
-        self.z_control._incr = self.step_size*self.sf
+        #self.x_control._incr = self.step_size*self.sf
+        #self.y_control._incr = self.step_size*self.sf
+        #self.z_control._incr = self.step_size*self.sf
         
         self.x_control.set(value = position[0])
         self.y_control.set(value = position[1])
