@@ -52,16 +52,16 @@ class controller():
         self.display.print("STEP SIZE: ")
         self.display.print(str(self.step_size))
         
-        self.display.blink()
+        #self.display.blink()
         
         proposed_size = self.step_size
         
         old_val = self.x_control.value()
         new_val = old_val
-        time.sleep_ms(300)
+        time.sleep_ms(500)
+        self.x_control._incr = 1
         
         while self.start_pin.value()==0 and self.stop_pin.value()==0:
-            self.x_control._incr = 1
             new_val = self.x_control.value()
             if old_val != new_val:
                 old_val = new_val
@@ -74,7 +74,6 @@ class controller():
                 time.sleep_ms(200)
         
         self.step_size = proposed_size
-        input('step_size = '+str(self.step_size))
         self.x_control._incr = self.step_size*self.sf
         self.y_control._incr = self.step_size*self.sf
         self.z_control._incr = self.step_size*self.sf

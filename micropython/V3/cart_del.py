@@ -68,10 +68,7 @@ class Stage():
                         ])
         # Matrix for Cartesian to Delta
         self.c2d = det_inv(self.d2c)[1]
-        input(self.c.x_control._incr)
-        self.update_pos([1,1,1])
-        self.update_pos([-1,-1,-1])
-        self.update_pos([X_pos,Y_pos,Z_pos])
+        self.update_pos([X_pos,Y_pos,Z_pos], update=True)
         
     def move_rel(self,vector:list):
         # relative movement vector in the form [X, Y, Z] to be given by another function
@@ -109,7 +106,7 @@ class Stage():
         self.move_rel([dX, dY, dZ])
         return
     
-    def update_pos(self, vector=[0,0,0], update=True):
+    def update_pos(self, vector=[0,0,0], update=False):
         # vector: list [X, Y, Z]
         self.X_pos += vector[0]
         self.Y_pos += vector[1]
@@ -117,7 +114,7 @@ class Stage():
         
         clr = '        '
             
-        if vector[0] != 0:
+        if vector[0] != 0 or update == True:
             print_x = self.X_pos / self.sf
             self.x_string = 'X:' + str(print_x)[:6]
             self.x_string = self.x_string + ' '*(len(self.x_string)-8)
@@ -127,7 +124,7 @@ class Stage():
             self.lcd.set_cursor(0,0)
             self.lcd.print(self.x_string)
         
-        if vector[1] != 0:
+        if vector[1] != 0 or update == True:
             print_y = self.Y_pos / self.sf
             self.y_string = 'Y:' + str(print_y)[:6]
             self.y_string = self.y_string + ' '*(len(self.y_string)-8)
@@ -141,7 +138,7 @@ class Stage():
             
             
         
-        if vector[2] != 0:
+        if vector[2] != 0 or update == True:
             print_z = self.Z_pos / self.sf
             self.z_string = 'Z:' + str(print_z)[:5]
             # this is hoping that z doesn't get too large for readability
@@ -159,10 +156,24 @@ class Stage():
         return
     
     def zero(self):
-        self.X_pos = 0
-        self.Y_pos = 0
-        self.Z_pos = 0
-        self.update_pos()
+        # provide option to zero
+        self.lcd.set_cursor(9,1)
+        self.lcd.print('##Zero?')
+        time.sleep_ms(500)
+        
+        while self.stop_pin.value() == 0 and self.start_pin.value() == 0:
+            time.sleep_ms(50)
+            
+        if self.start_pin.value() == 1: #accept zero
+            self.X_pos = 0
+            self.Y_pos = 0
+            self.Z_pos = 0
+            self.update_pos()
+            time.sleep_ms(300)
+            
+        else: # decline zero
+            self.update_pos(update=True)
+        
         
     def tune(self, vector):
         # vector for motor movements [A, B, C]
@@ -211,13 +222,24 @@ class Stage():
     def live_move(self, cycles=50, ms=5):
         steps_taken = [0,0,0]
         
-        while self.stop_pin.value() == 0:
+        # both buttons breaks loop
+        while self.stop_pin.value() == 0 or self.start_pin.value() == 0:
             vector = self.c.live_read(cycles, ms, steps_taken)
             steps_taken = self.move_rel(vector)
             print(steps_taken)
             print('position = ', [self.X_pos, self. Y_pos, self.Z_pos])
+            
+            if self.stop_pin.value() == 1 and self.start_pin.value() == 0:
+                self.zero()
+                self.update_pos(update=True)
+            if self.start_pin.value() == 1 and self.stop_pin.value() == 0:
+                time.sleep_ms(100)
+                self.c.set_step_size()
+                self.update_pos(update=True)
         
-        
+        print('Both buttons pressed')     
+        self.lcd.set_cursor(11,1)
+        self.lcd.print('#STOP')
 
 
 stage = Stage()
