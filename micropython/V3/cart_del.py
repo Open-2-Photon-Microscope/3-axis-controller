@@ -244,4 +244,5 @@ class Stage():
 
 stage = Stage()
 
-stage.live_move()
+if __name__ == '__main__':
+    stage.live_move()
