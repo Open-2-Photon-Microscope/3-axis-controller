@@ -98,7 +98,7 @@ class Stage():
         return position_vector.data # returns actual distance moved
         
     def move_to(self, vector):
-        # vector: list [X, Y, Z]
+        # vector: list [X, Y, Z] in um
         # Take difference from current position and use as movement vector in move_rel
         dX = vector[0] - self.X_pos
         dY = vector[1] - self.Y_pos
