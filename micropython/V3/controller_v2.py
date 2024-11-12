@@ -10,7 +10,8 @@ class controller():
                  stop_pin=Pin(39,Pin.IN),
                  display=lcd,
                  scale_factor=2,
-                 step_size=0.5
+                 step_size=0.5,
+                 skip_init=False
                  ):
         self.start_pin = start_pin
         self.stop_pin = stop_pin
@@ -41,8 +42,9 @@ class controller():
                                     reverse=True, 
                                     range_mode=RotaryIRQ.RANGE_UNBOUNDED)
         
-        self.step_size = 0.5
-        self.set_step_size()
+        #self.step_size = 0.5
+        if skip_init == False:
+            self.set_step_size()
         
 
 

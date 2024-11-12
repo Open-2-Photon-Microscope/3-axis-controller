@@ -11,9 +11,8 @@ from controller_v2 import controller
 
 class Stage():
     
-    def __init__(self, X_pos=0, Y_pos=0, Z_pos=0):
+    def __init__(self, X_pos=0, Y_pos=0, Z_pos=0, skip_init=False):
         # Position values can be preset if needed
-        # POS VALUES ARE ALWAYS IN STEPS
         self.X_pos:float = X_pos
         self.Y_pos:float = Y_pos
         self.Z_pos:float = Z_pos
@@ -49,7 +48,8 @@ class Stage():
         
         self.c = controller(self.start_pin,
                             self.stop_pin,
-                            self.lcd)
+                            self.lcd,
+                            skip_init = skip_init)
         
         # DELTA GEOMETRY HANDLING
         # unedited values from https://gitlab.com/openflexure/openflexure-microscope-server/-/blob/master/openflexure_microscope/stage/sanga.py?ref_type=heads
@@ -72,9 +72,7 @@ class Stage():
         self.update_pos([X_pos,Y_pos,Z_pos], update=True)
         
     def move_rel(self,vector:list):
-        # relative movement vector in the form [X, Y, Z] 
-        # UNITS ARE STEPS
-        # to be given by another function
+        # relative movement vector in the form [X, Y, Z] to be given by another function
         # convert to [[X],[Y],[Z]] for matrix shape
         cart_vector = [[vector[0]],
                        [vector[1]],
@@ -83,8 +81,7 @@ class Stage():
         cart_vector = umatrix.matrix(cart_vector)
         
         # Convert cartesian to delta
-        # Should return motor vector [A, B, C]
-        delta_vector = dot(self.c2d, cart_vector) 
+        delta_vector = dot(self.c2d, cart_vector) # Should return motor vector [A, B, C]
         
         # Values to be given to stepper motors
         rounded_vector = delta_vector.apply(round)
@@ -102,8 +99,8 @@ class Stage():
         return position_vector.data # returns actual distance moved
         
     def move_to(self, vector):
-        # vector: list [X, Y, Z] in um
-        # Take difference from current position and use as vector in move_rel
+        # vector: list [X, Y, Z]
+        # Take difference from current position and use as movement vector in move_rel
         dX = vector[0] - self.X_pos
         dY = vector[1] - self.Y_pos
         dZ = vector[2] - self.Z_pos
@@ -117,9 +114,7 @@ class Stage():
         self.Z_pos += vector[2]
         
         clr = '        '
-        
-        # only clear the regions of the lcd that need it
-        # fixes flickering
+            
         if vector[0] != 0 or update == True:
             print_x = self.X_pos / self.sf
             self.x_string = 'X:' + str(print_x)[:6]
@@ -248,7 +243,6 @@ class Stage():
         self.lcd.print('#STOP')
 
 
-stage = Stage()
-
 if __name__ == '__main__':
+    stage = Stage()
     stage.live_move()
