@@ -1,10 +1,10 @@
-module base(x, y, h=5){
+module base(x, y, h=5, slot=true, hr){
     // x and y refer to screw hole positions
-    translate([-1*x/2,y/2,0])screw_post(h);
-    translate([-1*x/2,-1*y/2,0])screw_post(h);
+    translate([-1*x/2,y/2,0])screw_post(h, slot=slot, hole_ratio=hr);
+    translate([-1*x/2,-1*y/2,0])screw_post(h, slot=slot, hole_ratio=hr);
     rotate([0,0,180]){
-        translate([-1*x/2,y/2,0])screw_post(h);
-        translate([-1*x/2,-1*y/2,0])screw_post(h);
+        translate([-1*x/2,y/2,0])screw_post(h, slot=slot, hole_ratio=hr);
+        translate([-1*x/2,-1*y/2,0])screw_post(h, slot=slot, hole_ratio=hr);
     }//end rotate
     
 }// end module base
@@ -14,24 +14,23 @@ module base(x, y, h=5){
 
 //base(75,32); // lcd
 
-module screw_post(height, nut_h=2.8){
+module screw_post(height, nut_h=2.8,slot=true, hole_ratio=0.25){
     translate([0,0,height/2])difference(){
         
         // shell
         cube([8,8,height],center=true);
         // cutouts
         union(){
+            // center hole
+            translate([0,0,-height/hole_ratio])cylinder(d=3.4, h= height, $fn=18);
+            
+            if(slot==true){
             // nut
             translate([0,0,height/2-3])cylinder(d=6.95, h= nut_h, center=true,$fn=6);
-            
-            // center hole
-            translate([0,0,-height/4])cylinder(d=3.4, h= height, $fn=18);
-            
             // side exit
             translate([-5,0,height/2-3])cube([10,6,nut_h],center=true);
-            
             // overhang trick
-            translate([0,0,height/2-1.6])cube([3.4,6,0.3],center=true);
+            translate([0,0,height/2-1.6])cube([3.4,6,0.3],center=true);}//end if
         }
         
     }// end difference
@@ -39,44 +38,6 @@ module screw_post(height, nut_h=2.8){
 
 //screw_post(10);
 
-module bars(x, y, z, w=8){
-    translate([x/2,0,z])cube([w,y,w],center=true);
-    translate([-x/2,0,z])cube([w,y,w],center=true);
-    translate([0,y/2,z])cube([x,w,w],center=true);
-    
-    //translate([])cube();
-}//end module
-
-//bars(91,101,-15);
-
-module top_lvl(x, y, z, h){
-    enj_depth = -8;
-    enj_x = -30;
-    enj_y = 35;
-    translate([0,0,z/2])difference(){
-        cube([x, y, z], center=true);
-        union(){
-            translate([25,0,0.75])lcd();
-            
-            translate([5,-5,0]){ // ena1j encoders
-            translate([enj_x,enj_y,enj_depth])ena1j();
-            translate([enj_x,0,enj_depth])ena1j();
-            translate([enj_x,-1*enj_y,enj_depth])ena1j();
-            }// end translate
-            
-            translate([25,-48,-3.5])pwr_switch();
-            
-            translate([5,0,0]){ // push switches
-            translate([0,48,-3.2])push_switch();
-            translate([-20,48,-3.2])push_switch();
-            }// end translate
-        }//end union
-        }//end difference
-        rotate([180,0,0])base(91,101,h);// end rotate
-        
-}//end module top_lvl
-
-//top_lvl(100,114,5,45);
 
 module ena1j(){ // model of the rotary encoder
     cube([21.5,16,18.5],center=true);
@@ -133,4 +94,48 @@ module feet(d, screw_d, head_d, h){
     }//end difference
 }// end module feet
 
-feet(8, 3.4, 5.6, 5);
+//feet(8, 3.4, 5.6, 5);
+
+
+module top_enclosure(x, y, z, h){
+    enj_depth = -8;
+    enj_x = -30;
+    enj_y = 35;
+    translate([0,0,z/2])difference(){
+        cube([x, y, z], center=true);
+        union(){
+            translate([25,0,0.75])lcd();
+            
+            translate([5,-5,0]){ // ena1j encoders
+            translate([enj_x,enj_y,enj_depth])ena1j();
+            translate([enj_x,0,enj_depth])ena1j();
+            translate([enj_x,-1*enj_y,enj_depth])ena1j();
+            }// end translate
+            
+            translate([25,-48,-3.5])pwr_switch();
+            
+            translate([5,0,0]){ // push switches
+            translate([0,48,-3.2])push_switch();
+            translate([-20,48,-3.2])push_switch();
+            }// end translate
+        }//end union
+        }//end difference
+        rotate([180,0,0])base(91,101,h);
+        
+}//end module top_lvl
+
+%top_enclosure(100,114,5,45);
+
+module outer_enclosure(x=105, y=119, z=55){
+    inner_dims = [100,114,50];
+    
+    difference(){
+        translate([0,0,-z/2+5])cube([x,y,z],center=true);
+        translate([0,0,-20])cube(inner_dims,center=true);
+    }//end difference
+    base(91,101,5);
+}//end module outer_enclosure
+
+%outer_enclosure();
+
+base(91,101,5,slot=false);
