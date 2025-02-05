@@ -1,0 +1,4 @@
+Ref,Val,Package,PosX,PosY,Rot,Side
+"J8","Conn_01x16","PinHeader_1x08_P2.54mm_Vertical",130.025000,-148.000000,90.000000,bottom
+"J9","Conn_01x16","PinHeader_1x08_P2.54mm_Vertical",112.245000,-130.750000,-90.000000,bottom
+"J10","pcf8575 IO expander","PinHeader_1x05_P2.54mm_Vertical",105.495000,-144.270000,0.000000,bottom

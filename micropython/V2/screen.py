@@ -14,7 +14,6 @@ NUM_COLS = 16
 
 # define custom I2C interface, default is 'I2C(0)'
 # check the docs of your device for further details and pin infos
-# this are the pins for the Raspberry Pi Pico adapter board
 i2c = I2C(0, scl=scl_pin, sda=sda_pin, freq=800000)
 lcd = LCD(addr=I2C_ADDR, cols=NUM_COLS, rows=NUM_ROWS, i2c=i2c)
 

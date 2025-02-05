@@ -1,0 +1,12 @@
+Warning: Width correction constrained.  The width correction value must be in the range of [0.000001 mm; 0.199999 mm] for the current design rules.
+Plotted to '/home/marcus1/Documents/GitHub/3-axis-controller/electronics/integrated_board/integrated_board-F_Cu.gbr'.
+Plotted to '/home/marcus1/Documents/GitHub/3-axis-controller/electronics/integrated_board/integrated_board-B_Cu.gbr'.
+Plotted to '/home/marcus1/Documents/GitHub/3-axis-controller/electronics/integrated_board/integrated_board-F_Paste.gbr'.
+Plotted to '/home/marcus1/Documents/GitHub/3-axis-controller/electronics/integrated_board/integrated_board-B_Paste.gbr'.
+Plotted to '/home/marcus1/Documents/GitHub/3-axis-controller/electronics/integrated_board/integrated_board-F_Silkscreen.gbr'.
+Plotted to '/home/marcus1/Documents/GitHub/3-axis-controller/electronics/integrated_board/integrated_board-B_Silkscreen.gbr'.
+Plotted to '/home/marcus1/Documents/GitHub/3-axis-controller/electronics/integrated_board/integrated_board-F_Mask.gbr'.
+Plotted to '/home/marcus1/Documents/GitHub/3-axis-controller/electronics/integrated_board/integrated_board-B_Mask.gbr'.
+Plotted to '/home/marcus1/Documents/GitHub/3-axis-controller/electronics/integrated_board/integrated_board-Edge_Cuts.gbr'.
+Created Gerber job file '/home/marcus1/Documents/GitHub/3-axis-controller/electronics/integrated_board/integrated_board-job.gbrjob'.
+Info: Done.
