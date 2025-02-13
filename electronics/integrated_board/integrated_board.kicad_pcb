@@ -8311,7 +8311,7 @@
 		)
 		(property "Value" "UART"
 			(at 3.75 4.6 90)
-			(layer "F.Fab")
+			(layer "F.SilkS")
 			(uuid "0b68a928-5bd8-427e-a62e-b2c7927e0a11")
 			(effects
 				(font
