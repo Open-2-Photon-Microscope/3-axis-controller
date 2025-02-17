@@ -55,10 +55,7 @@ class Stepper:
         self._phase = 0
         self._stop()
         self._run_remaining = 0
-        
-        # OPEN-2PHOTON MICROSCOPY ADDED BACKLASH FEATURES
-        self.last_moved = 0
-        self.backlash = backlash
+        self.functional_multiplier = 1 # allows endstops to disable motors
 
     def _stop(self):
         [p.off() for p in self._pins]
@@ -82,7 +79,7 @@ class Stepper:
         period = int(delay*tick_hz)
         if period < 500:
             period = 500
-        self._run_remaining += count
+        self._run_remaining += count*self.functional_multiplier
         if self._run_remaining != 0:
             self._timer.init(period=period, tick_hz=tick_hz,
                              mode=machine.Timer.PERIODIC, callback=self._callback)

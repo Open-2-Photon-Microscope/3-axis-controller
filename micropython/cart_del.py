@@ -8,6 +8,7 @@ from math import sqrt
 from machine import Pin
 from stepper import Stepper
 from controller_v2 import controller
+from endstops_v2 import Endstops
 
 class Stage():
     
@@ -18,6 +19,7 @@ class Stage():
         self.Z_pos:float = Z_pos
         
         self.sf = 2 # scale factor ie steps per um
+        
         # I2C Screen
         self.lcd = screen.lcd
         self.lcd.begin()
@@ -34,13 +36,14 @@ class Stage():
                                 0x11,
                                 0x1B,
                                 0x15,
-                                0x10]
-                            )
+                                0x10])
         
         # Stepper motors
         self.motorA = Stepper(15,2,0,4,T=0)
         self.motorB = Stepper(16,17,5,18,T=1)
         self.motorC = Stepper(19,21,22,23,T=2)
+        
+        self.endstops = Endstops(self.motorA, self.motorB, self.motorC)
         
         # Rotary encoders + relevant buttons
         self.start_pin = Pin(36,Pin.IN)
@@ -151,7 +154,7 @@ class Stage():
             self.lcd.print(self.z_string)
         
         
-        print(f'({self.c.step_size})')
+        #print(f'({self.c.step_size})')
         self.lcd.set_cursor(11,1)
         self.lcd.print(f'({self.c.step_size})')
         return
@@ -182,43 +185,6 @@ class Stage():
         self.motorA.run(vector[0])
         self.motorB.run(vector[1])
         self.motorC.run(vector[2])
-        
-    def use_controller(self):
-        accept = False
-        # listen for buttons
-        while self.start_pin.value() == 0 or self.stop_pin.value() == 0: # when not both buttons
-            accept = False
-            # Stop button - prompt zero
-            if self.stop_pin.value() == 1 and self.start_pin.value() == 0:
-                time.sleep_ms(100)
-                self.lcd.set_cursor(9,1)
-                self.lcd.print('##Zero?')
-                time.sleep_ms(500)
-                while self.stop_pin.value() == 0 and self.start_pin.value() == 0:
-                    time.sleep_ms(50)
-                if self.start_pin.value() == 1: #accept zero
-                    self.zero()
-                    time.sleep_ms(300)
-                else: # decline zero
-                    self.update_pos()
-        
-            # Start button -  prompt c.run()
-            if self.start_pin.value() == 1 and self.stop_pin.value() == 0:
-                time.sleep_ms(300)
-                self.lcd.set_cursor(9,1)
-                self.lcd.print('CONTROL')
-                coords = self.c.run(position=[self.X_pos,
-                                                self.Y_pos,
-                                                self.Z_pos])
-                print(coords)
-                self.move_to(coords)
-                #self.update_pos(coords)
-                time.sleep_ms(100)
-            time.sleep_ms(200)
-            #print(self.start_pin.value(), self.stop_pin.value())
-        print('both buttons pressed')
-        self.lcd.set_cursor(11,1)
-        self.lcd.print('#STOP')
 
     def live_move(self, cycles=50, ms=5):
         steps_taken = [0,0,0]
@@ -241,8 +207,49 @@ class Stage():
         print('Both buttons pressed')     
         self.lcd.set_cursor(11,1)
         self.lcd.print('#STOP')
+    
+    def _switch_handler(self, p):
+        self.stop_pin.irq(None)
+        self.start_pin.irq(None)
+        self.motorA.stop()
+        self.motorB.stop()
+        self.motorC.stop()
+    
+    def enable_switches(self):
+        self.stop_pin.irq(trigger=Pin.IRQ_RISING, handler=self._switch_handler)
+        self.start_pin.irq(trigger=Pin.IRQ_RISING, handler=self._switch_handler)
 
+    def smooth_move(self):
+        self.c.x_control.reset()
+        self.c.y_control.reset()
+        self.c.z_control.reset()
+        self.enable_switches()
+        vector = []
+        
+        while self.stop_pin.value() == 0 or self.start_pin.value() == 0:
+            vector = [self.c.x_control.value(),
+                  self.c.y_control.value(),
+                  self.c.z_control.value()]
+            if vector != [0,0,0]:
+                self.move_rel(vector)
+                vector = [0,0,0]
+                self.c.x_control.reset()
+                self.c.y_control.reset()
+                self.c.z_control.reset()
+            time.sleep_ms(100)
+        
+            if self.stop_pin.value() == 1 and self.start_pin.value() == 0:
+                    self.zero()
+                    self.update_pos(update=True)
+            if self.start_pin.value() == 1 and self.stop_pin.value() == 0:
+                time.sleep_ms(100)
+                self.c.set_step_size()
+                self.update_pos(update=True)
+        print('Both buttons pressed')     
+        self.lcd.set_cursor(11,1)
+        self.lcd.print('#STOP')
+                
 
 if __name__ == '__main__':
     stage = Stage()
-    stage.live_move()
+    stage.smooth_move()

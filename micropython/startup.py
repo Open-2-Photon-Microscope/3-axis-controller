@@ -1,4 +1,5 @@
 # set motor pins to 0 on boot
+# aims to avoid any motors getting hot for mysterious reasons...
 from machine import Pin
 
 
