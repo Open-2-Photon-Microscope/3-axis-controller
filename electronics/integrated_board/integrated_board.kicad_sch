@@ -12414,7 +12414,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "C"
+		(property "Value" "33nF"
 			(at 146.05 243.8401 0)
 			(effects
 				(font
@@ -17518,7 +17518,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "C"
+		(property "Value" "33nF"
 			(at 146.05 227.3301 0)
 			(effects
 				(font
@@ -19361,7 +19361,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "C"
+		(property "Value" "33nF"
 			(at 146.05 260.3501 0)
 			(effects
 				(font

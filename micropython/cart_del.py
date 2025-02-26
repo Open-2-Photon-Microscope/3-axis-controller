@@ -12,7 +12,7 @@ from endstops_v2 import Endstops
 
 class Stage():
     
-    def __init__(self, X_pos=0, Y_pos=0, Z_pos=0, skip_init=False):
+    def __init__(self, X_pos=0, Y_pos=0, Z_pos=0, skip_init=True):
         # Position values can be preset if needed
         self.X_pos:float = X_pos
         self.Y_pos:float = Y_pos
@@ -159,16 +159,21 @@ class Stage():
         self.lcd.print(f'({self.c.step_size})')
         return
     
-    def zero(self):
-        # provide option to zero
-        self.lcd.set_cursor(9,1)
-        self.lcd.print('##Zero?')
-        time.sleep_ms(500)
+    def zero(self,skip=False):
         
-        while self.stop_pin.value() == 0 and self.start_pin.value() == 0:
-            time.sleep_ms(50)
+        if skip ==False:# provide option to zero
+            self.lcd.set_cursor(9,1)
+            self.lcd.print('##Zero?')
+            time.sleep_ms(500)
             
-        if self.start_pin.value() == 1: #accept zero
+            while self.stop_pin.value() == 0 and self.start_pin.value() == 0:
+                time.sleep_ms(50)
+            
+        if self.start_pin.value() == 1 or skip==True: #accept zero
+            self.endstops.zero()
+            self.motorA.functional_multiplier = 1
+            self.motorB.functional_multiplier = 1
+            self.motorC.functional_multiplier = 1
             self.X_pos = 0
             self.Y_pos = 0
             self.Z_pos = 0
@@ -177,7 +182,9 @@ class Stage():
             
         else: # decline zero
             self.update_pos(update=True)
-        
+    
+    def calculate_backlash(self):
+        self.motorA.backlash, self.motorB.backlash, self.motorC.backlash = self.endstops.zero(backlash = True)
         
     def tune(self, vector):
         # vector for motor movements [A, B, C]
@@ -208,22 +215,22 @@ class Stage():
         self.lcd.set_cursor(11,1)
         self.lcd.print('#STOP')
     
-    def _switch_handler(self, p):
-        self.stop_pin.irq(None)
-        self.start_pin.irq(None)
-        self.motorA.stop()
-        self.motorB.stop()
-        self.motorC.stop()
-    
-    def enable_switches(self):
-        self.stop_pin.irq(trigger=Pin.IRQ_RISING, handler=self._switch_handler)
-        self.start_pin.irq(trigger=Pin.IRQ_RISING, handler=self._switch_handler)
+#     def _switch_handler(self, p):
+#         self.stop_pin.irq(None)
+#         self.start_pin.irq(None)
+#         self.motorA.stop()
+#         self.motorB.stop()
+#         self.motorC.stop()
+#     
+#     def enable_switches(self):
+#         self.stop_pin.irq(trigger=Pin.IRQ_RISING, handler=self._switch_handler)
+#         self.start_pin.irq(trigger=Pin.IRQ_RISING, handler=self._switch_handler)
 
     def smooth_move(self):
         self.c.x_control.reset()
         self.c.y_control.reset()
         self.c.z_control.reset()
-        self.enable_switches()
+        #self.enable_switches()
         vector = []
         
         while self.stop_pin.value() == 0 or self.start_pin.value() == 0:
@@ -252,4 +259,5 @@ class Stage():
 
 if __name__ == '__main__':
     stage = Stage()
+    stage.zero(True)
     stage.smooth_move()

@@ -55,6 +55,9 @@ class Stepper:
         self._phase = 0
         self._stop()
         self._run_remaining = 0
+        
+        self.backlash = 0 # number of extra steps when changing direction
+        self.last_move = 0 # last value of run command for compensating backlash
         self.functional_multiplier = 1 # allows endstops to disable motors
 
     def _stop(self):
@@ -74,7 +77,8 @@ class Stepper:
             self._stop()
 
     def run(self, count, delay=0.001):
-        
+        if self.functional_multiplier != 0:
+            self.last_move = count
         tick_hz=1000000
         period = int(delay*tick_hz)
         if period < 500:
@@ -89,6 +93,8 @@ class Stepper:
 
     def stop(self):
         remaining = self._run_remaining
+        if self.functional_multiplier != 0:
+            self.last_move - remaining
         self._run_remaining = 0
         self._timer.deinit()
         self._stop()
