@@ -56,7 +56,7 @@ class Stepper:
         self._stop()
         self._run_remaining = 0
         
-        self.backlash = 0 # number of extra steps when changing direction
+        self.backlash = 100 # number of extra steps when changing direction
         self.last_move = 0 # last value of run command for compensating backlash
         self.functional_multiplier = 1 # allows endstops to disable motors
 
@@ -77,6 +77,7 @@ class Stepper:
             self._stop()
 
     def run(self, count, delay=0.001):
+        count += combineBySign(count, self.last_move, self.backlash)
         if self.functional_multiplier != 0:
             self.last_move = count
         tick_hz=1000000
@@ -105,4 +106,16 @@ class Stepper:
         return self._run_remaining != 0
 
 ###########################################################################
+    
+def combineBySign(a, b, value):
+    # a = intended movement
+    # b = previous movement
+    # used for adding backlash in the correct direction
+    if a*b > 0: # same sign, no backlash needed
+        return 0
+    elif a > b: #i.e. a is positive
+        return value
+    elif a < b: # i.e. a is negative
+        return -value
+    
     

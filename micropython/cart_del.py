@@ -165,11 +165,12 @@ class Stage():
             self.lcd.set_cursor(9,1)
             self.lcd.print('##Zero?')
             time.sleep_ms(500)
-            
+            if self.start_pin.value() == 1:
+                return
             while self.stop_pin.value() == 0 and self.start_pin.value() == 0:
                 time.sleep_ms(50)
             
-        if self.start_pin.value() == 1 or skip==True: #accept zero
+        if self.stop_pin.value() == 1 or skip==True: #accept zero
             self.endstops.zero()
             self.motorA.functional_multiplier = 1
             self.motorB.functional_multiplier = 1
@@ -252,6 +253,9 @@ class Stage():
                 time.sleep_ms(100)
                 self.c.set_step_size()
                 self.update_pos(update=True)
+        self.motorA.stop()
+        self.motorB.stop()
+        self.motorC.stop()
         print('Both buttons pressed')     
         self.lcd.set_cursor(11,1)
         self.lcd.print('#STOP')
