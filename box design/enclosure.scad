@@ -179,10 +179,10 @@ module outer_enclosure(x=102, y=116, z=50){
     //power port slot
     translate([21,-inner_dims[1]/2,5-z/2])cube([10,2.5,inner_dims[2]],center=true);
     // motor output
-    translate([inner_dims[0]/2,-8,5-z/2])cube([20,50,inner_dims[2]],center=true);
+    translate([inner_dims[0]/2,-11,5-z/2])cube([20,55,inner_dims[2]],center=true);
 }// end difference
 }//end module outer_enclosure
 
-top_enclosure(100,114,5,45);
-%outer_enclosure();
+%top_enclosure(100,114,5,45);
+outer_enclosure();
 //feet(8, 3.4, 5.6, 5); // print in TPU or something soft for grip
