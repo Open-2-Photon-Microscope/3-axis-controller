@@ -35,7 +35,7 @@ A manipulator device to operate microscope stage XYZ translations. This project 
     * __DO NOT PLUG SWITCHES INTO THE PORTS MARKED AS 12V/GND AS IT MAY START A FIRE AND SOME FEATURES MAY NOT WORK AS INTENDED__  
 1. Once you are confident the LCD is displaying text correctly when powered on, assemble the [enclosure](box%20design/enclosure.stl) as shown. Make sure to print the [feet](box%20design/enclosure_feet.stl) in some TPU for grip. Use M3x16 (or longer).  
 
-![Assemble the whole box!](illustrations/3-axis%20controller%20with%20arrows.png)
+![Assemble the whole box!](illustrations/3-axis%20controller%20assembly%20with%20arrows.png)
 
 ### Installing the I2C library
 #### You may need to install the `lib` portion of the I2C code another way - the above method __should__ work, so only follow these instructions if something is not behaving as expected.
