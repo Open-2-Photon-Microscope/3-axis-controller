@@ -7039,7 +7039,7 @@
 			(uuid "26ac0718-9abe-4327-9685-6f16755d0ed2")
 		)
 		(fp_text user "${REFERENCE}"
-			(at 3.75 2.7 360)
+			(at 3.75 2.7 0)
 			(layer "F.Fab")
 			(uuid "44026368-6ef2-427e-acfe-9c452d691df7")
 			(effects
@@ -9458,7 +9458,7 @@
 		(descr "JST XH series connector, B4B-XH-A (http://www.jst-mfg.com/product/pdf/eng/eXH.pdf), generated with kicad-footprint-generator")
 		(tags "connector JST XH vertical")
 		(property "Reference" "P16"
-			(at 3.75 -3.55 360)
+			(at 3.75 -3.55 0)
 			(layer "F.SilkS")
 			(uuid "c9e17000-ee8c-4426-86f5-77dfec064311")
 			(effects
@@ -9469,7 +9469,7 @@
 			)
 		)
 		(property "Value" "UART"
-			(at 3.75 4.6 360)
+			(at 3.75 4.6 0)
 			(layer "F.SilkS")
 			(uuid "0b68a928-5bd8-427e-a62e-b2c7927e0a11")
 			(effects
@@ -9864,7 +9864,7 @@
 			(uuid "f04f383c-3fa1-4beb-94a5-ac6d3c9d5778")
 		)
 		(fp_text user "${REFERENCE}"
-			(at 3.75 2.7 360)
+			(at 3.75 2.7 0)
 			(layer "F.Fab")
 			(uuid "c3a9ef13-a0ee-431c-b717-a78951c8dd63")
 			(effects
@@ -27653,6 +27653,19 @@
 				(size 1.5 1.5)
 				(thickness 0.15)
 			)
+		)
+	)
+	(gr_text "GND\nVCC\nSDA\nSCL"
+		(at 129.5 128 90)
+		(layer "F.SilkS")
+		(uuid "52116d51-e858-4544-a762-ecd84dad5e10")
+		(effects
+			(font
+				(size 1.5 1.5)
+				(thickness 0.3)
+				(bold yes)
+			)
+			(justify left bottom)
 		)
 	)
 	(gr_text "Endstop A\n"
