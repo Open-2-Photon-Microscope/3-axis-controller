@@ -163,15 +163,20 @@ class Stage():
         
         if skip ==False:# provide option to zero
             self.lcd.set_cursor(9,1)
-            self.lcd.print('##Zero?')
+            self.lcd.print('Zero?  ')
             time.sleep_ms(500)
             if self.start_pin.value() == 1:
                 return
             while self.stop_pin.value() == 0 and self.start_pin.value() == 0:
                 time.sleep_ms(50)
-            
+        
+        self.lcd.set_cursor(9,1)
+        self.lcd.print('Zero   ')
+        
         if self.stop_pin.value() == 1 or skip==True: #accept zero
             self.endstops.zero()
+            self.lcd.set_cursor(9,1)
+            self.lcd.print('       ')
             self.motorA.functional_multiplier = 1
             self.motorB.functional_multiplier = 1
             self.motorC.functional_multiplier = 1
