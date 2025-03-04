@@ -37,6 +37,17 @@ A manipulator device to operate microscope stage XYZ translations. This project 
  * _Note you should have all components wired up and screwed in at this point, not all of this is shown on the diagram._
 
     ![Assemble the whole box!](illustrations/3-axis%20controller%20assembly%20with%20arrows.png)
+    
+### Connecting to the Delta Stage
+1. Split the length (2M) of ribbon cable at the ends into 3 strips of 5 wires, and 3 strips of 2 wires. You can peel away the remaining wires
+1. Crimp **one** end of the cable, and slot into JST XH 5 or 2 cable headers respectively.
+1. Put a short length of heat-shrink tubing on each remaining end of 
+1. For the other end of the cables, solder the sets of 5 wires to straight JST HX 5 pin headers (male)
+    * _Ensure the orientation of both ends of the cable is such that each lane could form a complete loop if it were plugged into itself without any twist. (i.e. each in and out pin is the same)_
+1. Solder the sets of 2 wires to the footswitches - one to the middle-pin, the other to the pin towards the hinge of the lever.
+    * _Ensure this configuration is such that a circuit is made when the switch is pressed_
+1. Use m2x8 screws to attach the switches to the [modified feet of the Delta Stage](https://github.com/Open-2-Photon-Microscope/OF-larger-delta-stage/blob/main/3D_designs/STL/feet_with_endstop.stl) and use these in place of the ones on the official models when [assembling the actuators](https://build.openflexure.org/openflexure-delta-stage/v1.2.2/pages/index_transmission/pages/assembling_the_actuators.html)
+    * Make sure to use the modified models found [here](https://github.com/Open-2-Photon-Microscope/OF-larger-delta-stage/tree/main/3D_designs/STL) for the open 2-photon project  
 
 ### Installing the I2C library
 #### You may need to install the `lib` portion of the I2C code another way - the above method __should__ work, so only follow these instructions if something is not behaving as expected.
