@@ -102,11 +102,11 @@ class Endstops():
         self.motor_c.run(1000)
         while self.pcf.pin(self.end_a) == 0 or self.pcf.pin(self.end_b) == 0 or self.pcf.pin(self.end_c) == 0:
             if self.pcf.pin(self.end_a) != 1 and self.motor_a._run_remaining ==0:
-                self.motor_a.run(5000)
+                self.motor_a.run(7000)
             if self.pcf.pin(self.end_b) != 1 and self.motor_b._run_remaining ==0:
-                self.motor_b.run(5000)
+                self.motor_b.run(7000)
             if self.pcf.pin(self.end_c) != 1 and self.motor_c._run_remaining ==0: 
-                self.motor_c.run(5000)
+                self.motor_c.run(7000)
             sleep_ms(50)
         print('Motors raised')
         
