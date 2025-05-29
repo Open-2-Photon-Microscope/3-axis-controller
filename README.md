@@ -19,11 +19,11 @@ A manipulator device to operate microscope stage XYZ translations. This project 
     * *Connect your board to your PC via micro USB.*
 1. In Thonny, in the files panel (`view > files`) navigate to the location of the code to be installed
 1. Highlight all files and folders, including `lib`
-1. Right click and select __Upload to /__
+1. Right click and select `Upload to /`
 1. __CHECK:__ Does the file layout in the esp32 look like that on this GitHub?  
 
 ### Assembling the controller
-1. Assemble the JST-HX cables mentioned in the BOM
+1. Assemble the JST-XH cables mentioned in the BOM
 1. For each button and flip switch, cut one crimped wire in half and solder before attaching to the JST-XH head Orientation doesn't matter.  
     ![All switches in the panel use one crimped cable cut in half](illustrations/switch%20JST.jpg)
 1. Print the [enclosure top](box%20design/enclosure_top.stl) and assemble as shown. Include the other rotary encoders and switches (not shown). The appropriate washers and nuts to screw onto the front face should be shipped with each component. Use M3x10 screws for the LCD.
@@ -39,13 +39,15 @@ A manipulator device to operate microscope stage XYZ translations. This project 
     ![Assemble the whole box!](illustrations/3-axis%20controller%20assembly%20with%20arrows.png)
     
 ### Connecting to the Delta Stage
-1. Split the length (2M) of ribbon cable at the ends into 3 strips of 5 wires, and 3 strips of 2 wires. You can peel away the remaining wires
+1. Split the length (2M) of ribbon cable at the ends into 3 strips of 5 wires, and 3 strips of 2 wires. You can peel away the remaining wires and discard them.
+    * _Note it may be helpful for cable management not to entirely separate the 3x5 and 3x2 strips._
 1. Crimp **one** end of the cable, and slot into JST XH 5 or 2 cable headers respectively.
-1. Put a short length of heat-shrink tubing on each remaining end of 
-1. For the other end of the cables, solder the sets of 5 wires to straight JST HX 5 pin headers (male)
+1. Put a short length of heat-shrink tubing on each remaining end of **all** wires.
+1. Next, solder the remaining 3x5 wires to straight JST HX 5 pin headers (male)
     * _Ensure the orientation of both ends of the cable is such that each lane could form a complete loop if it were plugged into itself without any twist. (i.e. each in and out pin is the same)_
 1. Solder the sets of 2 wires to the footswitches - one to the middle-pin, the other to the pin towards the hinge of the lever.
-    * _Ensure this configuration is such that a circuit is made when the switch is pressed_
+    * _Ensure this configuration is such that a circuit is made (not broken) when the switch is pressed_
+1. Use hot air or a soldering iron to shrink the heat-shrink tubing and cover these solder joints.
 1. Use m2x8 screws to attach the switches to the [modified feet of the Delta Stage](https://github.com/Open-2-Photon-Microscope/OF-larger-delta-stage/blob/main/3D_designs/STL/feet_with_endstop.stl) and use these in place of the ones on the official models when [assembling the actuators](https://build.openflexure.org/openflexure-delta-stage/v1.2.2/pages/index_transmission/pages/assembling_the_actuators.html)
     * Make sure to use the modified models found [here](https://github.com/Open-2-Photon-Microscope/OF-larger-delta-stage/tree/main/3D_designs/STL) for the open 2-photon project  
 
