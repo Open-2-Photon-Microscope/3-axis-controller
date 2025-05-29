@@ -183,7 +183,7 @@ class Stage():
             self.X_pos = 0
             self.Y_pos = 0
             self.Z_pos = 0
-            self.update_pos()
+            self.update_pos(update=True)
             time.sleep_ms(300)
             
         else: # decline zero
