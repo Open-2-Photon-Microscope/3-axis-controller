@@ -191,6 +191,9 @@ class Stage():
     
     def calculate_backlash(self):
         self.motorA.backlash, self.motorB.backlash, self.motorC.backlash = self.endstops.zero(backlash = True)
+    
+    def set_backlash(self, value):
+        self.motorA.backlash = self.motorB.backlash = self.motorC.backlash = value
         
     def tune(self, vector):
         # vector for motor movements [A, B, C]
