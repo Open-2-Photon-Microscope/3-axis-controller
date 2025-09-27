@@ -43,7 +43,7 @@ module screw_post(height, nut_h=2.8,slot=true, hole_ratio=0.25,outer=true,hole_d
 
 module ena1j(){ // model of the rotary encoder
     cube([21.5,16,18.5],center=true);
-    translate([21.5/2-9.53,0,18.5/2])cylinder(d=9.8,h=6.35,$fn=28);
+    translate([21.5/2-9.53,0,18.5/2-1])cylinder(d=9.8,h=7.35,$fn=28);
     translate([21.5/2-9.53,8,18.5/2]){difference(){
         cylinder(h=1.7,d=3,$fn=18);
         translate([0,3.5/2,0])cube(3.5,center=true);
@@ -55,13 +55,16 @@ module ena1j(){ // model of the rotary encoder
 
 module lcd(){
     // screen
-    cube([24.5,71.5,8],center=true);
+    translate([0,0,4-9])cube([24.5,71.5,18],center=true);
     
     // space for soldered pins
-    translate([(24.5+6.6)/2,71.5/2-42/2,-3.3/2])cube([6.6,42,3.3],center=true);
+    translate([(24.5+6.6)/2,71.5/2-42/2,-13/2])cube([6.6,42,14],center=true);
     
     // space for part of backlight
-    translate([0,(71.5+4.6)/-2,2.85/2-3.3])cube([24.5,4.6,2.85],center=true);
+    translate([0,(71.5+4.6)/-2,-13/2])cube([24.5,4.6,13],center=true);
+    
+    //board
+    translate([0,0,-7])cube([38,82,10],center=true);
     
     //screw holes
     translate([16,75/2,0])cylinder(d=3.4,h=15, center=true, $fn=18);
@@ -70,19 +73,19 @@ module lcd(){
     translate([-15 ,-75/2,0])cylinder(d=3.4,h=15, center=true, $fn=18);
 }// end lcd
 
-//lcd();
+
 
 module pwr_switch(){
     cube([13, 7,8.9],center=true);
-    translate([0,0,8.9/2])cylinder(d=6.8,h=8.9,$fn=25);
-    translate([6.1,0,8.9/2])cylinder(d=2.5,h=3,$fn=18);
+    translate([0,0,8.9/2-1])cylinder(d=6.8,h=9.9,$fn=25);
+    translate([6.1,0,8.9/2-1])cylinder(d=2.5,h=4,$fn=18);
 }// end module pwr_switch
 
 //pwr_switch();
 
 module push_switch(){
     cube([6.9,8.4,8.4],center=true);
-    translate([0,0,4.2])cylinder(d=5,h=5.6,$fn=18);
+    translate([0,0,3.2])cylinder(d=5,h=6.6,$fn=18);
 }//end module push_switch
 
 //push_switch();
