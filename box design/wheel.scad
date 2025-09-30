@@ -4,7 +4,7 @@ use <fillets_and_rounds.scad>
 module shaft(id=6.6,od=10,slot_w=1,ih=18,oh=5,sl=10){
     $fn=30;
     cylinder(d=id,h=ih);
-    cylinder(d=od,h=oh);
+    translate([0,0,-1])cylinder(d=od,h=oh+1);
     translate([0,0,ih/2])add_rounds(axis="z",R=0.4)cube([slot_w,od,ih],center=true);
 }//end shaft
 

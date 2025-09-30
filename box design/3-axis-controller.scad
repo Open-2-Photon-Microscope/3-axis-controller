@@ -8,7 +8,7 @@ space = 30;
 module dial(){
     union(){
 translate([-1.22,0,-10])ena1j();
-translate([0,0,2])color("red",0.3)wheel();}}
+translate([0,0,2.05])color("red",0.3)wheel();}}
 
 module test_box(){
 difference(){
