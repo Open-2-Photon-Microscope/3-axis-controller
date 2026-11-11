@@ -57,7 +57,7 @@ module box(x=113,y=150,z=56,w=10){
     %translate([x+w/2-32,y+w/2-32,z+w-32])dials();
 }//end box
 
-box();
+*box();
 
 module board(h=10,d=3.3){
         %linear_extrude(5)polygon([[0,0],[0,98.5],[111,98.5],[110,0]]);
@@ -67,3 +67,30 @@ module board(h=10,d=3.3){
             }}//end for
 }//end board
 
+rotate([0,0,90]){
+difference(){
+color("darkgray")translate([-30,-30])
+	add_rounds(R=5,axis="xyz",fn=8)cube([80,160,60]);
+translate([-28.1,80,38])rotate([0,-90,0])lcd();}
+
+color("silver")translate([0,0,30])
+rotate([0,0,180])dials();
+
+translate([0,100,50])color("white")
+add_rounds(R=3,fn=10,axis="z")cube(15);
+translate([0,80,50])color("white")
+add_rounds(R=3,fn=10,axis="z")cube(15);
+translate([0,60,50])color("white")
+add_rounds(R=3,fn=10,axis="z")cube(15);
+translate([0,40,50])color("white")
+add_rounds(R=3,fn=10,axis="z")cube(15);
+
+translate([20,100,50])color("white")
+add_rounds(R=3,fn=10,axis="z")cube(15);
+translate([20,80,50])color("white")
+add_rounds(R=3,fn=10,axis="z")cube(15);
+translate([20,60,50])color("white")
+add_rounds(R=3,fn=10,axis="z")cube(15);
+translate([20,40,50])color("white")
+add_rounds(R=3,fn=10,axis="z")cube(15);
+}
