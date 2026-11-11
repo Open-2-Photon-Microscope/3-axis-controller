@@ -55,7 +55,7 @@ module ena1j(){ // model of the rotary encoder
 
 module lcd(){
     // screen
-    translate([0,0,4-9])cube([24.5,71.5,18],center=true);
+    color("blue")translate([0,0,4-9])cube([24.5,71.5,18],center=true);
     
     // space for soldered pins
     translate([(24.5+6.6)/2,71.5/2-42/2,-13/2])cube([6.6,42,14],center=true);
